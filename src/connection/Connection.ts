@@ -327,7 +327,7 @@ export class Connection {
     /**
      * Gets entity metadata for the given entity class or schema name.
      */
-    getMetadata(target: Function|EntitySchema<any>|string): EntityMetadata {
+  getMetadata(target: Function|EntitySchema<any>|string): EntityMetadata {
         const metadata = this.findMetadata(target);
         if (!metadata)
             throw new EntityMetadataNotFoundError(target);
@@ -481,6 +481,8 @@ export class Connection {
     protected findMetadata(target: Function|EntitySchema<any>|string): EntityMetadata|undefined {
         return this.entityMetadatas.find(metadata => {
             if (metadata.target === target)
+              return true;
+            if (typeof target === "function" && (metadata.name === (target as Function).name))
                 return true;
             if (target instanceof EntitySchema) {
                 return metadata.name === target.options.name;
