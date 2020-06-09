@@ -162,7 +162,8 @@ export class ReturningResultsEntityUpdator {
                     (needToCheckGenerated && column.isGenerated)  ||
                     column.isCreateDate ||
                     column.isUpdateDate ||
-                    column.isVersion;
+                    column.isVersion ||
+                    column.propertyName === "id";
         });
     }
 
