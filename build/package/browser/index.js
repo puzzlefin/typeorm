@@ -101,6 +101,7 @@ export { UpdateResult } from "./query-builder/result/UpdateResult";
 export { DeleteResult } from "./query-builder/result/DeleteResult";
 export { EntityManager } from "./entity-manager/EntityManager";
 export { MongoEntityManager } from "./entity-manager/MongoEntityManager";
+export { Migration } from "./migration/Migration";
 export { DefaultNamingStrategy } from "./naming-strategy/DefaultNamingStrategy";
 export { Repository } from "./repository/Repository";
 export { TreeRepository } from "./repository/TreeRepository";

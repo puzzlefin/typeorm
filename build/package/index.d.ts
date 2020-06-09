@@ -129,6 +129,7 @@ export { QueryRunner } from "./query-runner/QueryRunner";
 export { EntityManager } from "./entity-manager/EntityManager";
 export { MongoEntityManager } from "./entity-manager/MongoEntityManager";
 export { MigrationInterface } from "./migration/MigrationInterface";
+export { Migration } from "./migration/Migration";
 export { DefaultNamingStrategy } from "./naming-strategy/DefaultNamingStrategy";
 export { NamingStrategyInterface } from "./naming-strategy/NamingStrategyInterface";
 export { Repository } from "./repository/Repository";
