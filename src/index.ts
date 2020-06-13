@@ -160,6 +160,10 @@ export {EntitySchemaIndexOptions} from "./entity-schema/EntitySchemaIndexOptions
 export {EntitySchemaRelationOptions} from "./entity-schema/EntitySchemaRelationOptions";
 export {ColumnType} from "./driver/types/ColumnTypes";
 export {PromiseUtils} from "./util/PromiseUtils";
+export {TableColumnOptions} from "./schema-builder/options/TableColumnOptions";
+export {TableForeignKeyOptions} from "./schema-builder/options/TableForeignKeyOptions";
+export {TableIndexOptions} from "./schema-builder/options/TableIndexOptions";
+export {TableOptions} from "./schema-builder/options/TableOptions";
 
 // -------------------------------------------------------------------------
 // Deprecated

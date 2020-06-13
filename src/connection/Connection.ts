@@ -485,6 +485,9 @@ export class Connection {
             if (metadata.target === target) {
                 return true;
             }
+            if (typeof target === "function" && (metadata.name === (target as Function).name)) {
+               return true;
+            }
             if (target instanceof EntitySchema) {
                 return metadata.name === target.options.name;
             }
