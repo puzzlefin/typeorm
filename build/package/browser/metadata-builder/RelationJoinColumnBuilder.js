@@ -114,11 +114,13 @@ var RelationJoinColumnBuilder = /** @class */ (function () {
                     !!joinColumn.name;
             });
             var joinColumnName = joinColumnMetadataArg ? joinColumnMetadataArg.name : _this.connection.namingStrategy.joinColumnName(relation.propertyName, referencedColumn.propertyName);
-            var relationalColumn = relation.entityMetadata.ownColumns.find(function (column) { return column.databaseName === joinColumnName; });
+            var relationalColumns = relation.embeddedMetadata ? relation.embeddedMetadata.columns : relation.entityMetadata.ownColumns;
+            var relationalColumn = relationalColumns.find(function (column) { return column.databaseNameWithoutPrefixes === joinColumnName; });
             if (!relationalColumn) {
                 relationalColumn = new ColumnMetadata({
                     connection: _this.connection,
                     entityMetadata: relation.entityMetadata,
+                    embeddedMetadata: relation.embeddedMetadata,
                     args: {
                         target: "",
                         mode: "virtual",
