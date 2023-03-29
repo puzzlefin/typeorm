@@ -22,3 +22,8 @@ Added ability to pass in a log4js to the migration executor
 Feb 21, 2023
 
 Fixed package.json main to point at just the index file as wanted by node 16+
+
+March 29, 2023
+
+Changed updated_at columns to get DEFAULT vs CURRENT_TIME
+Added softDefaultDefault so we can pass in our NOW3()
