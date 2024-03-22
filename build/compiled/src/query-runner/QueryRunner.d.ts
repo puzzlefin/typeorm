@@ -181,15 +181,24 @@ export interface QueryRunner {
      */
     addColumns(table: Table | string, columns: TableColumn[]): Promise<void>;
     /**
-     * Renames a column.
+     *
+     * Renames a column. DO NOT USE THIS - IT DROPS THE COLUMN AND THEN RECREATES IT
+     *
+     * @deprecated
      */
     renameColumn(table: Table | string, oldColumnOrName: TableColumn | string, newColumnOrName: TableColumn | string): Promise<void>;
     /**
-     * Changes a column in the table.
+     *
+     * Changes a column in the table. DO NOT USE THIS - IT DROPS THE COLUMN AND THEN RECREATES IT
+     *
+     * @deprecated
      */
     changeColumn(table: Table | string, oldColumn: TableColumn | string, newColumn: TableColumn): Promise<void>;
     /**
-     * Changes columns in the table.
+     *
+     * Changes columns in the table. DO NOT USE THIS - IT DROPS THE COLUMN AND THEN RECREATES IT
+     *
+     * @deprecated
      */
     changeColumns(table: Table | string, changedColumns: {
         oldColumn: TableColumn;
