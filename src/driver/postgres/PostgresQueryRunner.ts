@@ -622,7 +622,7 @@ export class PostgresQueryRunner extends BaseQueryRunner implements QueryRunner 
      * Renames column in the given table.
      */
     async renameColumn(tableOrName: Table|string, oldTableColumnOrName: TableColumn|string, newTableColumnOrName: TableColumn|string): Promise<void> {
-        console.warning('***** WARNING:***** renameColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newTableColumnOrName});
+        console.warn('***** WARNING:***** renameColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newTableColumnOrName});
         const table = tableOrName instanceof Table ? tableOrName : await this.getCachedTable(tableOrName);
         const oldColumn = oldTableColumnOrName instanceof TableColumn ? oldTableColumnOrName : table.columns.find(c => c.name === oldTableColumnOrName);
         if (!oldColumn)
@@ -643,7 +643,7 @@ export class PostgresQueryRunner extends BaseQueryRunner implements QueryRunner 
      * Changes a column in the table.
      */
     async changeColumn(tableOrName: Table|string, oldTableColumnOrName: TableColumn|string, newColumn: TableColumn): Promise<void> {
-        console.warning('***** WARNING:***** changeColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newColumn});
+        console.warn('***** WARNING:***** changeColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newColumn});
         const table = tableOrName instanceof Table ? tableOrName : await this.getCachedTable(tableOrName);
         let clonedTable = table.clone();
         const upQueries: Query[] = [];

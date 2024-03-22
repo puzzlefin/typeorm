@@ -558,7 +558,7 @@ class PostgresQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
      */
     renameColumn(tableOrName, oldTableColumnOrName, newTableColumnOrName) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            console.error('***** WARNING:***** renameColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newTableColumnOrName });
+            console.warn('***** WARNING:***** renameColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newTableColumnOrName });
             const table = tableOrName instanceof Table_1.Table ? tableOrName : yield this.getCachedTable(tableOrName);
             const oldColumn = oldTableColumnOrName instanceof TableColumn_1.TableColumn ? oldTableColumnOrName : table.columns.find(c => c.name === oldTableColumnOrName);
             if (!oldColumn)
@@ -579,7 +579,7 @@ class PostgresQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
      */
     changeColumn(tableOrName, oldTableColumnOrName, newColumn) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            console.error('***** WARNING:***** changeColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newColumn });
+            console.warn('***** WARNING:***** changeColumn drops the column and then creates a new one', { tableOrName, oldTableColumnOrName, newColumn });
             const table = tableOrName instanceof Table_1.Table ? tableOrName : yield this.getCachedTable(tableOrName);
             let clonedTable = table.clone();
             const upQueries = [];
