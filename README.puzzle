@@ -52,3 +52,9 @@ July 6, 2023
 
 Realized since we are using this directly, don't use the packages directory,
 everything gets copied in there and makes life hell.
+
+March 22, 2024
+
+Marking changeColumn and renameColumn as deprecated as they drop the column and recreate it
+
+Make sure you are using node 16
