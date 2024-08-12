@@ -19,8 +19,8 @@ import { TreeType } from "./types/TreeTypes";
 import { UniqueMetadata } from "./UniqueMetadata";
 import { ClosureTreeOptions } from "./types/ClosureTreeOptions";
 export declare class ColumnNotFoundError extends Error {
-    name: string;
-    constructor(name: string);
+    column: string;
+    constructor(column: string);
 }
 /**
  * Contains all entity metadata.

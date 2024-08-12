@@ -29,8 +29,9 @@ import {UniqueMetadata} from "./UniqueMetadata";
 import {ClosureTreeOptions} from "./types/ClosureTreeOptions";
 
 export class ColumnNotFoundError extends Error {
-  constructor(public name: string) { 
-    super(`Column not found ${name}`); 
+  constructor(public column: string) { 
+    super(`Column not found ${column}`); 
+    this.name = 'ColumnNotFoundError';
   }
 }
 

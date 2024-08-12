@@ -9,9 +9,10 @@ const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMap
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
 class ColumnNotFoundError extends Error {
-    constructor(name) {
-        super(`Column not found ${name}`);
-        this.name = name;
+    constructor(column) {
+        super(`Column not found ${column}`);
+        this.column = column;
+        this.name = 'ColumnNotFoundError';
     }
 }
 exports.ColumnNotFoundError = ColumnNotFoundError;
