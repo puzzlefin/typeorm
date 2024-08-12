@@ -32,7 +32,6 @@ export class ColumnNotFoundError extends Error {
   constructor(public column: string) { 
     super(`Column not found ${column}`); 
     this.name = 'ColumnNotFoundError';
-    Object.setPrototypeOf(this, ColumnNotFoundError.prototype);
   }
 }
 
