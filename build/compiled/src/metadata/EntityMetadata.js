@@ -358,7 +358,7 @@ class EntityMetadata {
         if (column) {
             return column;
         }
-        throw new ColumnNotFoundError(databaseName);
+        return undefined; // we want this to prune out in case our entity doesn't have all the db columns
     }
     /**
      * Finds column with a given property path.
