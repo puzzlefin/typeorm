@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AfterRemove = void 0;
+exports.AfterRemove = AfterRemove;
 const __1 = require("../../");
 const EventListenerTypes_1 = require("../../metadata/types/EventListenerTypes");
 /**
@@ -15,5 +15,4 @@ function AfterRemove() {
         });
     };
 }
-exports.AfterRemove = AfterRemove;
 //# sourceMappingURL=AfterRemove.js.map

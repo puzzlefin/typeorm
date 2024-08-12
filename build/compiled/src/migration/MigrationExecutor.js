@@ -39,8 +39,8 @@ class MigrationExecutor {
      * Tries to execute a single migration given.
      */
     executeMigration(migration) {
-        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
             (_a = this.puzzleLogger) === null || _a === void 0 ? void 0 : _a.info(`Running migration`, { name: migration.name });
             try {
                 return this.withQueryRunner((queryRunner) => tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -145,8 +145,8 @@ class MigrationExecutor {
      * thus not saved in the database.
      */
     executePendingMigrations() {
-        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
             const queryRunner = this.queryRunner || this.connection.createQueryRunner();
             // create migrations table if its not created yet
             yield this.createMigrationsTableIfNotExist(queryRunner);

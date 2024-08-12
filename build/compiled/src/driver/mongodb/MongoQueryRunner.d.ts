@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { QueryRunner } from "../../query-runner/QueryRunner";
 import { ObjectLiteral } from "../../common/ObjectLiteral";
 import { TableColumn } from "../../schema-builder/table/TableColumn";

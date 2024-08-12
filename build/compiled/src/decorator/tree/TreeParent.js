@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TreeParent = void 0;
+exports.TreeParent = TreeParent;
 const __1 = require("../../");
 /**
  * Marks a entity property as a parent of the tree.
@@ -22,5 +22,4 @@ function TreeParent() {
         });
     };
 }
-exports.TreeParent = TreeParent;
 //# sourceMappingURL=TreeParent.js.map

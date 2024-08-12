@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TableInheritance = void 0;
+exports.TableInheritance = TableInheritance;
 const __1 = require("../../");
 /**
  * Sets for entity to use table inheritance pattern.
@@ -14,5 +14,4 @@ function TableInheritance(options) {
         });
     };
 }
-exports.TableInheritance = TableInheritance;
 //# sourceMappingURL=TableInheritance.js.map

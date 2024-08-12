@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AfterLoad = void 0;
+exports.AfterLoad = AfterLoad;
 const __1 = require("../../");
 const EventListenerTypes_1 = require("../../metadata/types/EventListenerTypes");
 /**
@@ -15,5 +15,4 @@ function AfterLoad() {
         });
     };
 }
-exports.AfterLoad = AfterLoad;
 //# sourceMappingURL=AfterLoad.js.map

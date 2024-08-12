@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Column = void 0;
+exports.Column = Column;
 const __1 = require("../../");
 const ColumnTypeUndefinedError_1 = require("../../error/ColumnTypeUndefinedError");
 /**
@@ -62,5 +62,4 @@ function Column(typeOrOptions, options) {
         }
     };
 }
-exports.Column = Column;
 //# sourceMappingURL=Column.js.map

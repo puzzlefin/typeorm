@@ -147,8 +147,8 @@ class Connection {
      *
      * @param dropBeforeSync If set to true then it drops the database with all its tables and data
      */
-    synchronize(dropBeforeSync = false) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    synchronize() {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (dropBeforeSync = false) {
             if (!this.isConnected)
                 throw new CannotExecuteNotConnectedError_1.CannotExecuteNotConnectedError(this.name);
             if (dropBeforeSync)

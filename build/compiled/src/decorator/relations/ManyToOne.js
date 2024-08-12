@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ManyToOne = void 0;
+exports.ManyToOne = ManyToOne;
 const __1 = require("../../");
 /**
  * A many-to-one relation allows creating the type of relation where Entity1 can have a single instance of Entity2, but
@@ -38,5 +38,4 @@ function ManyToOne(typeFunctionOrTarget, inverseSideOrOptions, options) {
         });
     };
 }
-exports.ManyToOne = ManyToOne;
 //# sourceMappingURL=ManyToOne.js.map

@@ -330,8 +330,8 @@ class CockroachQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
             if (ifNotExist) {
                 const isTableExist = yield this.hasTable(table);
                 if (isTableExist)
@@ -368,8 +368,8 @@ class CockroachQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drops the table.
      */
-    dropTable(target, ifExist, dropForeignKeys = true, dropIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(target_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (target, ifExist, dropForeignKeys = true, dropIndices = true) {
             // to perform drop queries for foreign keys and indices.
             if (ifExist) {
                 const isTableExist = yield this.hasTable(target);

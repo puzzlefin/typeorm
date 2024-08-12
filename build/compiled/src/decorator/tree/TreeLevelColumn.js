@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TreeLevelColumn = void 0;
+exports.TreeLevelColumn = TreeLevelColumn;
 const __1 = require("../../");
 /**
  * Creates a "level"/"length" column to the table that holds a closure table.
@@ -15,5 +15,4 @@ function TreeLevelColumn() {
         });
     };
 }
-exports.TreeLevelColumn = TreeLevelColumn;
 //# sourceMappingURL=TreeLevelColumn.js.map

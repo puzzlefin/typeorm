@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityMetadata = void 0;
+exports.EntityMetadata = exports.ColumnNotFoundError = void 0;
 const PostgresDriver_1 = require("../driver/postgres/PostgresDriver");
 const SapDriver_1 = require("../driver/sap/SapDriver");
 const SqlServerDriver_1 = require("../driver/sqlserver/SqlServerDriver");
@@ -8,6 +8,13 @@ const OracleDriver_1 = require("../driver/oracle/OracleDriver");
 const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMapError");
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
+class ColumnNotFoundError extends Error {
+    constructor(name) {
+        super(`Column not found ${name}`);
+        this.name = name;
+    }
+}
+exports.ColumnNotFoundError = ColumnNotFoundError;
 /**
  * Contains all entity metadata.
  */
@@ -335,13 +342,21 @@ class EntityMetadata {
      * Finds column with a given property name.
      */
     findColumnWithPropertyName(propertyName) {
-        return this.columns.find(column => column.propertyName === propertyName);
+        const column = this.columns.find(column => column.propertyName === propertyName);
+        if (column) {
+            return column;
+        }
+        throw new ColumnNotFoundError(propertyName);
     }
     /**
      * Finds column with a given database name.
      */
     findColumnWithDatabaseName(databaseName) {
-        return this.columns.find(column => column.databaseName === databaseName);
+        const column = this.columns.find(column => column.databaseName === databaseName);
+        if (column) {
+            return column;
+        }
+        throw new ColumnNotFoundError(databaseName);
     }
     /**
      * Finds column with a given property path.
@@ -355,7 +370,7 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
-        return undefined;
+        throw new ColumnNotFoundError(propertyPath);
     }
     /**
      * Finds columns with a given property path.
@@ -370,13 +385,17 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns)
             return relation.joinColumns;
-        return [];
+        throw new ColumnNotFoundError(propertyPath);
     }
     /**
      * Finds relation with the given property path.
      */
     findRelationWithPropertyPath(propertyPath) {
-        return this.relations.find(relation => relation.propertyPath === propertyPath);
+        const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
+        if (relation) {
+            return relation;
+        }
+        throw new ColumnNotFoundError(propertyPath);
     }
     /**
      * Checks if there is an embedded with a given property path.
@@ -388,7 +407,11 @@ class EntityMetadata {
      * Finds embedded with a given property path.
      */
     findEmbeddedWithPropertyPath(propertyPath) {
-        return this.allEmbeddeds.find(embedded => embedded.propertyPath === propertyPath);
+        const embedded = this.allEmbeddeds.find(embedded => embedded.propertyPath === propertyPath);
+        if (embedded) {
+            return embedded;
+        }
+        throw new ColumnNotFoundError(propertyPath);
     }
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.

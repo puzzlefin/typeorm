@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Entity = void 0;
+exports.Entity = Entity;
 const __1 = require("../../");
 /**
  * This decorator is used to mark classes that will be an entity (table or document depend on database type).
@@ -23,5 +23,4 @@ function Entity(nameOrOptions, maybeOptions) {
         });
     };
 }
-exports.Entity = Entity;
 //# sourceMappingURL=Entity.js.map

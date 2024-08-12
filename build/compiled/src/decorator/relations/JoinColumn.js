@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JoinColumn = void 0;
+exports.JoinColumn = JoinColumn;
 const __1 = require("../../");
 /**
  * JoinColumn decorator used on one-to-one relations to specify owner side of relationship.
@@ -20,5 +20,4 @@ function JoinColumn(optionsOrOptionsArray) {
         });
     };
 }
-exports.JoinColumn = JoinColumn;
 //# sourceMappingURL=JoinColumn.js.map

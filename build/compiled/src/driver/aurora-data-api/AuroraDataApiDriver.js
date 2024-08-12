@@ -35,21 +35,21 @@ class AuroraDataApiDriver {
             // numeric types
             "bit",
             "int",
-            "integer",
+            "integer", // synonym for int
             "tinyint",
             "smallint",
             "mediumint",
             "bigint",
             "float",
             "double",
-            "double precision",
-            "real",
+            "double precision", // synonym for double
+            "real", // synonym for double
             "decimal",
-            "dec",
-            "numeric",
-            "fixed",
-            "bool",
-            "boolean",
+            "dec", // synonym for decimal
+            "numeric", // synonym for decimal
+            "fixed", // synonym for decimal
+            "bool", // synonym for tinyint
+            "boolean", // synonym for tinyint
             // date and time types
             "date",
             "datetime",
@@ -58,10 +58,10 @@ class AuroraDataApiDriver {
             "year",
             // string types
             "char",
-            "nchar",
+            "nchar", // synonym for national char
             "national char",
             "varchar",
-            "nvarchar",
+            "nvarchar", // synonym for national varchar
             "national varchar",
             "blob",
             "text",

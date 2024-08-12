@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionManager = void 0;
+exports.TransactionManager = TransactionManager;
 const __1 = require("../../");
 /**
  * Injects transaction's entity manager into the method wrapped with @Transaction decorator.
@@ -14,5 +14,4 @@ function TransactionManager() {
         });
     };
 }
-exports.TransactionManager = TransactionManager;
 //# sourceMappingURL=TransactionManager.js.map

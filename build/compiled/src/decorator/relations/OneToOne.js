@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OneToOne = void 0;
+exports.OneToOne = OneToOne;
 const __1 = require("../../");
 /**
  * One-to-one relation allows to create direct relation between two entities. Entity1 have only one Entity2.
@@ -37,5 +37,4 @@ function OneToOne(typeFunctionOrTarget, inverseSideOrOptions, options) {
         });
     };
 }
-exports.OneToOne = OneToOne;
 //# sourceMappingURL=OneToOne.js.map

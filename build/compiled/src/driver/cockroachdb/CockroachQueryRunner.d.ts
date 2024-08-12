@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { QueryRunner } from "../../query-runner/QueryRunner";
 import { TableColumn } from "../../schema-builder/table/TableColumn";
 import { Table } from "../../schema-builder/table/Table";

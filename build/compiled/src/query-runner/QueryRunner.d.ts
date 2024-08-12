@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { TableColumn } from "../schema-builder/table/TableColumn";
 import { Table } from "../schema-builder/table/Table";
 import { TableForeignKey } from "../schema-builder/table/TableForeignKey";

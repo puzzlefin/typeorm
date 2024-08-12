@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Generated = void 0;
+exports.Generated = Generated;
 const __1 = require("../");
 /**
  * Marks a column to generate a value on entity insertion.
@@ -20,5 +20,4 @@ function Generated(strategy = "increment") {
         });
     };
 }
-exports.Generated = Generated;
 //# sourceMappingURL=Generated.js.map

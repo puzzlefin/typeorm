@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrimaryGeneratedColumn = void 0;
+exports.PrimaryGeneratedColumn = PrimaryGeneratedColumn;
 const __1 = require("../../");
 /**
  * Column decorator is used to mark a specific class property as a table column.
@@ -54,5 +54,4 @@ function PrimaryGeneratedColumn(strategyOrOptions, maybeOptions) {
         });
     };
 }
-exports.PrimaryGeneratedColumn = PrimaryGeneratedColumn;
 //# sourceMappingURL=PrimaryGeneratedColumn.js.map

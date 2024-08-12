@@ -62,8 +62,8 @@ class SqljsDriver extends AbstractSqliteDriver_1.AbstractSqliteDriver {
      * Loads a database from a given file (Node.js), local storage key (browser) or array.
      * This will delete the current database!
      */
-    load(fileNameOrLocalStorageOrData, checkIfFileOrLocalStorageExists = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    load(fileNameOrLocalStorageOrData_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (fileNameOrLocalStorageOrData, checkIfFileOrLocalStorageExists = true) {
             if (typeof fileNameOrLocalStorageOrData === "string") {
                 // content has to be loaded
                 if (PlatformTools_1.PlatformTools.type === "node") {

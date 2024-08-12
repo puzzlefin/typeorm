@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Unique = void 0;
+exports.Unique = Unique;
 const index_1 = require("../index");
 /**
  * Composite unique constraint must be set on entity classes and must specify entity's fields to be unique.
@@ -28,5 +28,4 @@ function Unique(nameOrFields, maybeFields) {
         (0, index_1.getMetadataArgsStorage)().uniques.push(args);
     };
 }
-exports.Unique = Unique;
 //# sourceMappingURL=Unique.js.map

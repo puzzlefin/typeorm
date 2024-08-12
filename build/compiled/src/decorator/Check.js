@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Check = void 0;
+exports.Check = Check;
 const __1 = require("../");
 /**
  * Creates a database check.
@@ -20,5 +20,4 @@ function Check(nameOrExpression, maybeExpression) {
         });
     };
 }
-exports.Check = Check;
 //# sourceMappingURL=Check.js.map

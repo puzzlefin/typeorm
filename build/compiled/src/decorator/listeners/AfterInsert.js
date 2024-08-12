@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AfterInsert = void 0;
+exports.AfterInsert = AfterInsert;
 const __1 = require("../../");
 const EventListenerTypes_1 = require("../../metadata/types/EventListenerTypes");
 /**
@@ -15,5 +15,4 @@ function AfterInsert() {
         });
     };
 }
-exports.AfterInsert = AfterInsert;
 //# sourceMappingURL=AfterInsert.js.map

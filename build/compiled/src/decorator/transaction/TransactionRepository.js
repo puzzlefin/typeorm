@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionRepository = void 0;
+exports.TransactionRepository = TransactionRepository;
 const __1 = require("../../");
 const CannotReflectMethodParameterTypeError_1 = require("../../error/CannotReflectMethodParameterTypeError");
 /**
@@ -25,5 +25,4 @@ function TransactionRepository(entityType) {
         });
     };
 }
-exports.TransactionRepository = TransactionRepository;
 //# sourceMappingURL=TransactionRepository.js.map

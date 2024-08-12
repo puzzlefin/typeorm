@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteDateColumn = void 0;
+exports.DeleteDateColumn = DeleteDateColumn;
 const __1 = require("../../");
 /**
  * This column will store a delete date of the soft-deleted object.
@@ -16,5 +16,4 @@ function DeleteDateColumn(options) {
         });
     };
 }
-exports.DeleteDateColumn = DeleteDateColumn;
 //# sourceMappingURL=DeleteDateColumn.js.map

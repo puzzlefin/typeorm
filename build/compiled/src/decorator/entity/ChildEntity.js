@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChildEntity = void 0;
+exports.ChildEntity = ChildEntity;
 const __1 = require("../../");
 /**
  * Special type of the table used in the single-table inherited tables.
@@ -21,5 +21,4 @@ function ChildEntity(discriminatorValue) {
         }
     };
 }
-exports.ChildEntity = ChildEntity;
 //# sourceMappingURL=ChildEntity.js.map

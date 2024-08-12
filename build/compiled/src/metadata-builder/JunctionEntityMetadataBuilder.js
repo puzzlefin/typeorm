@@ -61,7 +61,7 @@ class JunctionEntityMetadataBuilder {
                             && (this.connection.driver instanceof MysqlDriver_1.MysqlDriver || this.connection.driver instanceof AuroraDataApiDriver_1.AuroraDataApiDriver)
                             && (referencedColumn.generationStrategy === "uuid" || referencedColumn.type === "uuid")
                             ? "36"
-                            : referencedColumn.length,
+                            : referencedColumn.length, // fix https://github.com/typeorm/typeorm/issues/3604
                         width: referencedColumn.width,
                         type: referencedColumn.type,
                         precision: referencedColumn.precision,
@@ -99,8 +99,8 @@ class JunctionEntityMetadataBuilder {
                             && (this.connection.driver instanceof MysqlDriver_1.MysqlDriver || this.connection.driver instanceof AuroraDataApiDriver_1.AuroraDataApiDriver)
                             && (inverseReferencedColumn.generationStrategy === "uuid" || inverseReferencedColumn.type === "uuid")
                             ? "36"
-                            : inverseReferencedColumn.length,
-                        width: inverseReferencedColumn.width,
+                            : inverseReferencedColumn.length, // fix https://github.com/typeorm/typeorm/issues/3604
+                        width: inverseReferencedColumn.width, // fix https://github.com/typeorm/typeorm/issues/6442
                         type: inverseReferencedColumn.type,
                         precision: inverseReferencedColumn.precision,
                         scale: inverseReferencedColumn.scale,

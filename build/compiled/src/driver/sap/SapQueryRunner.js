@@ -332,8 +332,8 @@ class SapQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
             if (ifNotExist) {
                 const isTableExist = yield this.hasTable(table);
                 if (isTableExist)
@@ -362,8 +362,8 @@ class SapQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drops the table.
      */
-    dropTable(tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(tableOrName_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
             if (ifExist) {
                 const isTableExist = yield this.hasTable(tableOrName);
                 if (!isTableExist)
@@ -454,7 +454,7 @@ class SapQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
                     return new TableForeignKey_1.TableForeignKey({
                         name: dbForeignKey["CONSTRAINT_NAME"],
                         columnNames: foreignKeys.map(dbFk => dbFk["COLUMN_NAME"]),
-                        referencedTableName: newTable.name,
+                        referencedTableName: newTable.name, // we use renamed table name
                         referencedColumnNames: foreignKeys.map(dbFk => dbFk["REFERENCED_COLUMN_NAME"]),
                         onDelete: dbForeignKey["DELETE_RULE"] === "RESTRICT" ? "NO ACTION" : dbForeignKey["DELETE_RULE"],
                         onUpdate: dbForeignKey["UPDATE_RULE"] === "RESTRICT" ? "NO ACTION" : dbForeignKey["UPDATE_RULE"],

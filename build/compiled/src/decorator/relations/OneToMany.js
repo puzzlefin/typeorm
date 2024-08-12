@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OneToMany = void 0;
+exports.OneToMany = OneToMany;
 const __1 = require("../../");
 /**
  * A one-to-many relation allows creating the type of relation where Entity1 can have multiple instances of Entity2,
@@ -30,5 +30,4 @@ function OneToMany(typeFunctionOrTarget, inverseSide, options) {
         });
     };
 }
-exports.OneToMany = OneToMany;
 //# sourceMappingURL=OneToMany.js.map
