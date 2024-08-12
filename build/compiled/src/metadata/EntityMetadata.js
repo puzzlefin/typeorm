@@ -13,6 +13,7 @@ class ColumnNotFoundError extends Error {
         super(`Column not found ${column}`);
         this.column = column;
         this.name = 'ColumnNotFoundError';
+        Object.setPrototypeOf(this, ColumnNotFoundError.prototype);
     }
 }
 exports.ColumnNotFoundError = ColumnNotFoundError;
