@@ -645,7 +645,7 @@ export class EntityMetadata {
         if (column) {
           return column;
         }
-        throw new ColumnNotFoundError(propertyName);
+        return undefined; // we want this to prune out in case our entity doesn't have all the db columns
     }
 
     /**
