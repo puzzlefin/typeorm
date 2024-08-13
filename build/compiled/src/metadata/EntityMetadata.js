@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityMetadata = exports.ColumnNotFoundError = void 0;
+exports.EntityMetadata = void 0;
 const PostgresDriver_1 = require("../driver/postgres/PostgresDriver");
 const SapDriver_1 = require("../driver/sap/SapDriver");
 const SqlServerDriver_1 = require("../driver/sqlserver/SqlServerDriver");
@@ -8,14 +8,7 @@ const OracleDriver_1 = require("../driver/oracle/OracleDriver");
 const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMapError");
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
-class ColumnNotFoundError extends Error {
-    constructor(column) {
-        super(`Column not found ${column}`);
-        this.column = column;
-        this.name = 'ColumnNotFoundError';
-    }
-}
-exports.ColumnNotFoundError = ColumnNotFoundError;
+const EntityColumnNotFound_1 = require("../error/EntityColumnNotFound");
 /**
  * Contains all entity metadata.
  */
@@ -347,7 +340,7 @@ class EntityMetadata {
         if (column) {
             return column;
         }
-        throw new ColumnNotFoundError(propertyName);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyName);
     }
     /**
      * Finds column with a given database name.
@@ -371,7 +364,7 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath);
     }
     /**
      * Finds columns with a given property path.
@@ -386,7 +379,7 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns)
             return relation.joinColumns;
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath);
     }
     /**
      * Finds relation with the given property path.
@@ -396,7 +389,7 @@ class EntityMetadata {
         if (relation) {
             return relation;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath);
     }
     /**
      * Checks if there is an embedded with a given property path.
@@ -412,7 +405,7 @@ class EntityMetadata {
         if (embedded) {
             return embedded;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath);
     }
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.

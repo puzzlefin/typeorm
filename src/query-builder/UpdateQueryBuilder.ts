@@ -409,7 +409,18 @@ export class UpdateQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
         if (metadata) {
             EntityMetadata.createPropertyPath(metadata, valuesSet).forEach(propertyPath => {
                 // todo: make this and other query builder to work with properly with tables without metadata
-                const columns = metadata.findColumnsWithPropertyPath(propertyPath);
+
+                let columns;
+                try { 
+                  columns = this.expressionMap.mainAlias!.metadata.findColumnsWithPropertyPath(propertyPath);
+                }
+                catch (e) {
+                  if (e instanceof EntityColumnNotFound) {
+                    e.extra = valuesSet;
+                  } 
+                  throw e;
+                }
+
 
                 if (columns.length <= 0) {
                     const env = PlatformTools.getEnvVariable("GATEWAY_ENV");

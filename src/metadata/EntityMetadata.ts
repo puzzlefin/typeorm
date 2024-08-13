@@ -27,13 +27,7 @@ import {TableType} from "./types/TableTypes";
 import {TreeType} from "./types/TreeTypes";
 import {UniqueMetadata} from "./UniqueMetadata";
 import {ClosureTreeOptions} from "./types/ClosureTreeOptions";
-
-export class ColumnNotFoundError extends Error {
-  constructor(public column: string) { 
-    super(`Column not found ${column}`); 
-    this.name = 'ColumnNotFoundError';
-  }
-}
+import {EntityColumnNotFound} from "../error/EntityColumnNotFound";
 
 /**
  * Contains all entity metadata.
@@ -644,7 +638,7 @@ export class EntityMetadata {
         if (column) {
           return column;
         }
-        throw new ColumnNotFoundError(propertyName);
+        throw new EntityColumnNotFound(propertyName);
     }
 
     /**
@@ -672,7 +666,7 @@ export class EntityMetadata {
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
 
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath);
     }
 
     /**
@@ -690,7 +684,7 @@ export class EntityMetadata {
         if (relation && relation.joinColumns)
             return relation.joinColumns;
 
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath);
     }
 
     /**
@@ -701,7 +695,7 @@ export class EntityMetadata {
         if (relation) {
           return relation;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath);
     }
 
     /**
@@ -719,7 +713,7 @@ export class EntityMetadata {
         if (embedded) {
           return embedded;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath);
     }
 
     /**
