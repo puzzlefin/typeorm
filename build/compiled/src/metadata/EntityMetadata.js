@@ -9,6 +9,21 @@ const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMap
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
 const EntityColumnNotFound_1 = require("../error/EntityColumnNotFound");
+const PlatformTools_1 = require("../platform/PlatformTools");
+const LoggerFactory_1 = require("../logger/LoggerFactory");
+const throwOrLogMissingColumn = (propertyPath, debug) => {
+    const yesThrow = PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+    const e = new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
+    const extra = e.stack ? e.stack.toString() : e.toString();
+    const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");
+    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
+    if (yesThrow) {
+        throw e;
+    }
+    else {
+        return undefined;
+    }
+};
 /**
  * Contains all entity metadata.
  */
@@ -340,7 +355,8 @@ class EntityMetadata {
         if (column) {
             return column;
         }
-        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyName, debug);
+        throwOrLogMissingColumn(propertyName, debug);
+        return undefined;
     }
     /**
      * Finds column with a given database name.
@@ -364,7 +380,8 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
-        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
     /**
      * Finds columns with a given property path.
@@ -379,7 +396,8 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns)
             return relation.joinColumns;
-        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return [];
     }
     /**
      * Finds relation with the given property path.
@@ -389,7 +407,8 @@ class EntityMetadata {
         if (relation) {
             return relation;
         }
-        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
     /**
      * Checks if there is an embedded with a given property path.
@@ -405,7 +424,8 @@ class EntityMetadata {
         if (embedded) {
             return embedded;
         }
-        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.
