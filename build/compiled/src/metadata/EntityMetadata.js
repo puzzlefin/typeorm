@@ -12,7 +12,9 @@ const EntityColumnNotFound_1 = require("../error/EntityColumnNotFound");
 const PlatformTools_1 = require("../platform/PlatformTools");
 const LoggerFactory_1 = require("../logger/LoggerFactory");
 const throwOrLogMissingColumn = (propertyPath, debug) => {
-    const yesThrow = PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+    const env = PlatformTools_1.PlatformTools.getEnvVariable("GATEWAY_ENV");
+    const throwEnv = PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+    const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
     const e = new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     const extra = e.stack ? e.stack.toString() : e.toString();
     const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");

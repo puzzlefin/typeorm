@@ -32,7 +32,10 @@ import { PlatformTools } from "../platform/PlatformTools";
 import { LoggerFactory } from "../logger/LoggerFactory";
 
 const throwOrLogMissingColumn = (propertyPath: string, debug?: any) => {
-  const yesThrow = PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+  const env = PlatformTools.getEnvVariable("GATEWAY_ENV");
+  const throwEnv = PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+
+  const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
 
   const e = new EntityColumnNotFound(propertyPath, debug);
   const extra = e.stack ? e.stack.toString() : e.toString();
