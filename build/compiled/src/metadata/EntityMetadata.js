@@ -17,12 +17,12 @@ const throwOrLogMissingColumn = (propertyPath, debug) => {
     const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
     const e = new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     const extra = e.stack ? e.stack.toString() : e.toString();
-    const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");
-    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
     if (yesThrow) {
         throw e;
     }
     else {
+        const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");
+        logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
         return undefined;
     }
 };
