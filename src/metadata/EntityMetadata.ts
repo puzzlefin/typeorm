@@ -40,12 +40,11 @@ const throwOrLogMissingColumn = (propertyPath: string, debug?: any) => {
   const e = new EntityColumnNotFound(propertyPath, debug);
   const extra = e.stack ? e.stack.toString() : e.toString();
 
-  const logger = (new LoggerFactory()).create("advanced-console", "all");
-  logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
-
   if (yesThrow) {
     throw e;
   } else {
+    const logger = (new LoggerFactory()).create("advanced-console", "all");
+    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
     return undefined;
   }
 }
