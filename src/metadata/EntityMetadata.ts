@@ -28,6 +28,26 @@ import {TreeType} from "./types/TreeTypes";
 import {UniqueMetadata} from "./UniqueMetadata";
 import {ClosureTreeOptions} from "./types/ClosureTreeOptions";
 import {EntityColumnNotFound} from "../error/EntityColumnNotFound";
+import { PlatformTools } from "../platform/PlatformTools";
+import { LoggerFactory } from "../logger/LoggerFactory";
+
+const throwOrLogMissingColumn = (propertyPath: string, debug?: any) => {
+  const env = PlatformTools.getEnvVariable("GATEWAY_ENV");
+  const throwEnv = PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
+
+  const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
+
+  const e = new EntityColumnNotFound(propertyPath, debug);
+  const extra = e.stack ? e.stack.toString() : e.toString();
+
+  if (yesThrow) {
+    throw e;
+  } else {
+    const logger = (new LoggerFactory()).create("advanced-console", "all");
+    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
+    return undefined;
+  }
+}
 
 /**
  * Contains all entity metadata.
@@ -638,7 +658,8 @@ export class EntityMetadata {
         if (column) {
           return column;
         }
-        throw new EntityColumnNotFound(propertyName, debug);
+        throwOrLogMissingColumn(propertyName, debug);
+        return undefined;
     }
 
     /**
@@ -666,7 +687,8 @@ export class EntityMetadata {
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
 
-        throw new EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
 
     /**
@@ -684,7 +706,8 @@ export class EntityMetadata {
         if (relation && relation.joinColumns)
             return relation.joinColumns;
 
-        throw new EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return [];
     }
 
     /**
@@ -695,7 +718,8 @@ export class EntityMetadata {
         if (relation) {
           return relation;
         }
-        throw new EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
 
     /**
@@ -713,7 +737,8 @@ export class EntityMetadata {
         if (embedded) {
           return embedded;
         }
-        throw new EntityColumnNotFound(propertyPath, debug);
+        throwOrLogMissingColumn(propertyPath, debug);
+        return undefined;
     }
 
     /**
