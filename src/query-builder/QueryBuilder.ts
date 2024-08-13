@@ -858,7 +858,7 @@ export abstract class QueryBuilder<Entity extends ObjectLiteral> {
                     const propertyPaths = EntityMetadata.createPropertyPath(this.expressionMap.mainAlias!.metadata, where);
 
                     return propertyPaths.map((propertyPath, propertyIndex) => {
-                        const columns = this.expressionMap.mainAlias!.metadata.findColumnsWithPropertyPath(propertyPath);
+                        const columns = this.expressionMap.mainAlias!.metadata.findColumnsWithPropertyPath(propertyPath, wheres);
 
                         if (!columns.length) {
                             const env = PlatformTools.getEnvVariable("GATEWAY_ENV");

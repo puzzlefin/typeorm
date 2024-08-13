@@ -627,7 +627,7 @@ class QueryBuilder {
                 andConditions = wheres.map((where, whereIndex) => {
                     const propertyPaths = EntityMetadata_1.EntityMetadata.createPropertyPath(this.expressionMap.mainAlias.metadata, where);
                     return propertyPaths.map((propertyPath, propertyIndex) => {
-                        const columns = this.expressionMap.mainAlias.metadata.findColumnsWithPropertyPath(propertyPath);
+                        const columns = this.expressionMap.mainAlias.metadata.findColumnsWithPropertyPath(propertyPath, wheres);
                         if (!columns.length) {
                             const env = PlatformTools_1.PlatformTools.getEnvVariable("GATEWAY_ENV");
                             if (["development", "local"].includes(env)) {
