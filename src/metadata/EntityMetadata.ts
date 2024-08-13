@@ -27,13 +27,7 @@ import {TableType} from "./types/TableTypes";
 import {TreeType} from "./types/TreeTypes";
 import {UniqueMetadata} from "./UniqueMetadata";
 import {ClosureTreeOptions} from "./types/ClosureTreeOptions";
-
-export class ColumnNotFoundError extends Error {
-  constructor(public column: string) { 
-    super(`Column not found ${column}`); 
-    this.name = 'ColumnNotFoundError';
-  }
-}
+import {EntityColumnNotFound} from "../error/EntityColumnNotFound";
 
 /**
  * Contains all entity metadata.
@@ -639,12 +633,12 @@ export class EntityMetadata {
     /**
      * Finds column with a given property name.
      */
-    findColumnWithPropertyName(propertyName: string): ColumnMetadata|undefined {
+    findColumnWithPropertyName(propertyName: string, debug?: any): ColumnMetadata|undefined {
         const column = this.columns.find(column => column.propertyName === propertyName);
         if (column) {
           return column;
         }
-        throw new ColumnNotFoundError(propertyName);
+        throw new EntityColumnNotFound(propertyName, debug);
     }
 
     /**
@@ -661,7 +655,7 @@ export class EntityMetadata {
     /**
      * Finds column with a given property path.
      */
-    findColumnWithPropertyPath(propertyPath: string): ColumnMetadata|undefined {
+    findColumnWithPropertyPath(propertyPath: string, debug?: any): ColumnMetadata|undefined {
         const column = this.columns.find(column => column.propertyPath === propertyPath);
         if (column)
             return column;
@@ -672,14 +666,14 @@ export class EntityMetadata {
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
 
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath, debug);
     }
 
     /**
      * Finds columns with a given property path.
      * Property path can match a relation, and relations can contain multiple columns.
      */
-    findColumnsWithPropertyPath(propertyPath: string): ColumnMetadata[] {
+    findColumnsWithPropertyPath(propertyPath: string, debug?: any): ColumnMetadata[] {
         const column = this.columns.find(column => column.propertyPath === propertyPath);
         if (column)
             return [column];
@@ -690,18 +684,18 @@ export class EntityMetadata {
         if (relation && relation.joinColumns)
             return relation.joinColumns;
 
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath, debug);
     }
 
     /**
      * Finds relation with the given property path.
      */
-    findRelationWithPropertyPath(propertyPath: string): RelationMetadata|undefined {
+    findRelationWithPropertyPath(propertyPath: string, debug?: any): RelationMetadata|undefined {
         const relation =  this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation) {
           return relation;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath, debug);
     }
 
     /**
@@ -714,12 +708,12 @@ export class EntityMetadata {
     /**
      * Finds embedded with a given property path.
      */
-    findEmbeddedWithPropertyPath(propertyPath: string): EmbeddedMetadata|undefined {
+    findEmbeddedWithPropertyPath(propertyPath: string, debug?: any): EmbeddedMetadata|undefined {
         const embedded = this.allEmbeddeds.find(embedded => embedded.propertyPath === propertyPath);
         if (embedded) {
           return embedded;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound(propertyPath, debug);
     }
 
     /**

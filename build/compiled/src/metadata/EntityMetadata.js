@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityMetadata = exports.ColumnNotFoundError = void 0;
+exports.EntityMetadata = void 0;
 const PostgresDriver_1 = require("../driver/postgres/PostgresDriver");
 const SapDriver_1 = require("../driver/sap/SapDriver");
 const SqlServerDriver_1 = require("../driver/sqlserver/SqlServerDriver");
@@ -8,14 +8,7 @@ const OracleDriver_1 = require("../driver/oracle/OracleDriver");
 const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMapError");
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
-class ColumnNotFoundError extends Error {
-    constructor(column) {
-        super(`Column not found ${column}`);
-        this.column = column;
-        this.name = 'ColumnNotFoundError';
-    }
-}
-exports.ColumnNotFoundError = ColumnNotFoundError;
+const EntityColumnNotFound_1 = require("../error/EntityColumnNotFound");
 /**
  * Contains all entity metadata.
  */
@@ -342,12 +335,12 @@ class EntityMetadata {
     /**
      * Finds column with a given property name.
      */
-    findColumnWithPropertyName(propertyName) {
+    findColumnWithPropertyName(propertyName, debug) {
         const column = this.columns.find(column => column.propertyName === propertyName);
         if (column) {
             return column;
         }
-        throw new ColumnNotFoundError(propertyName);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyName, debug);
     }
     /**
      * Finds column with a given database name.
@@ -362,7 +355,7 @@ class EntityMetadata {
     /**
      * Finds column with a given property path.
      */
-    findColumnWithPropertyPath(propertyPath) {
+    findColumnWithPropertyPath(propertyPath, debug) {
         const column = this.columns.find(column => column.propertyPath === propertyPath);
         if (column)
             return column;
@@ -371,13 +364,13 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     }
     /**
      * Finds columns with a given property path.
      * Property path can match a relation, and relations can contain multiple columns.
      */
-    findColumnsWithPropertyPath(propertyPath) {
+    findColumnsWithPropertyPath(propertyPath, debug) {
         const column = this.columns.find(column => column.propertyPath === propertyPath);
         if (column)
             return [column];
@@ -386,17 +379,17 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns)
             return relation.joinColumns;
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     }
     /**
      * Finds relation with the given property path.
      */
-    findRelationWithPropertyPath(propertyPath) {
+    findRelationWithPropertyPath(propertyPath, debug) {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation) {
             return relation;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     }
     /**
      * Checks if there is an embedded with a given property path.
@@ -407,12 +400,12 @@ class EntityMetadata {
     /**
      * Finds embedded with a given property path.
      */
-    findEmbeddedWithPropertyPath(propertyPath) {
+    findEmbeddedWithPropertyPath(propertyPath, debug) {
         const embedded = this.allEmbeddeds.find(embedded => embedded.propertyPath === propertyPath);
         if (embedded) {
             return embedded;
         }
-        throw new ColumnNotFoundError(propertyPath);
+        throw new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     }
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.

@@ -18,10 +18,6 @@ import { TableType } from "./types/TableTypes";
 import { TreeType } from "./types/TreeTypes";
 import { UniqueMetadata } from "./UniqueMetadata";
 import { ClosureTreeOptions } from "./types/ClosureTreeOptions";
-export declare class ColumnNotFoundError extends Error {
-    column: string;
-    constructor(column: string);
-}
 /**
  * Contains all entity metadata.
  */
@@ -447,7 +443,7 @@ export declare class EntityMetadata {
     /**
      * Finds column with a given property name.
      */
-    findColumnWithPropertyName(propertyName: string): ColumnMetadata | undefined;
+    findColumnWithPropertyName(propertyName: string, debug?: any): ColumnMetadata | undefined;
     /**
      * Finds column with a given database name.
      */
@@ -455,16 +451,16 @@ export declare class EntityMetadata {
     /**
      * Finds column with a given property path.
      */
-    findColumnWithPropertyPath(propertyPath: string): ColumnMetadata | undefined;
+    findColumnWithPropertyPath(propertyPath: string, debug?: any): ColumnMetadata | undefined;
     /**
      * Finds columns with a given property path.
      * Property path can match a relation, and relations can contain multiple columns.
      */
-    findColumnsWithPropertyPath(propertyPath: string): ColumnMetadata[];
+    findColumnsWithPropertyPath(propertyPath: string, debug?: any): ColumnMetadata[];
     /**
      * Finds relation with the given property path.
      */
-    findRelationWithPropertyPath(propertyPath: string): RelationMetadata | undefined;
+    findRelationWithPropertyPath(propertyPath: string, debug?: any): RelationMetadata | undefined;
     /**
      * Checks if there is an embedded with a given property path.
      */
@@ -472,7 +468,7 @@ export declare class EntityMetadata {
     /**
      * Finds embedded with a given property path.
      */
-    findEmbeddedWithPropertyPath(propertyPath: string): EmbeddedMetadata | undefined;
+    findEmbeddedWithPropertyPath(propertyPath: string, debug?: any): EmbeddedMetadata | undefined;
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.
      * If relation value is an array its being flattened.
