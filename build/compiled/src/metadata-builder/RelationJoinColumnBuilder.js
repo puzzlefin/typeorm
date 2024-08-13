@@ -132,7 +132,7 @@ class RelationJoinColumnBuilder {
                                 && (this.connection.driver instanceof MysqlDriver_1.MysqlDriver || this.connection.driver instanceof AuroraDataApiDriver_1.AuroraDataApiDriver)
                                 && (referencedColumn.generationStrategy === "uuid" || referencedColumn.type === "uuid")
                                 ? "36"
-                                : referencedColumn.length,
+                                : referencedColumn.length, // fix https://github.com/typeorm/typeorm/issues/3604
                             width: referencedColumn.width,
                             charset: referencedColumn.charset,
                             collation: referencedColumn.collation,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityRepository = void 0;
+exports.EntityRepository = EntityRepository;
 const __1 = require("../");
 /**
  * Used to declare a class as a custom repository.
@@ -15,5 +15,4 @@ function EntityRepository(entity) {
         });
     };
 }
-exports.EntityRepository = EntityRepository;
 //# sourceMappingURL=EntityRepository.js.map

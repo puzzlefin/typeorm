@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Equal = void 0;
+exports.Equal = Equal;
 const FindOperator_1 = require("../FindOperator");
 /**
  * Find Options Operator.
@@ -9,5 +9,4 @@ const FindOperator_1 = require("../FindOperator");
 function Equal(value) {
     return new FindOperator_1.FindOperator("equal", value);
 }
-exports.Equal = Equal;
 //# sourceMappingURL=Equal.js.map

@@ -1,6 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createQueryBuilder = exports.getMongoRepository = exports.getCustomRepository = exports.getTreeRepository = exports.getRepository = exports.getSqljsManager = exports.getMongoManager = exports.getManager = exports.getConnection = exports.createConnections = exports.createConnection = exports.getConnectionManager = exports.getConnectionOptions = exports.getMetadataArgsStorage = exports.EntitySchema = exports.DefaultNamingStrategy = exports.MigrationExecutor = exports.Migration = exports.MongoEntityManager = exports.DeleteResult = exports.UpdateResult = exports.InsertResult = exports.Brackets = exports.RelationQueryBuilder = exports.UpdateQueryBuilder = exports.InsertQueryBuilder = exports.DeleteQueryBuilder = exports.SelectQueryBuilder = exports.QueryBuilder = exports.ConnectionManager = exports.Connection = exports.ConnectionOptionsReader = void 0;
+exports.EntitySchema = exports.DefaultNamingStrategy = exports.MigrationExecutor = exports.Migration = exports.MongoEntityManager = exports.DeleteResult = exports.UpdateResult = exports.InsertResult = exports.Brackets = exports.RelationQueryBuilder = exports.UpdateQueryBuilder = exports.InsertQueryBuilder = exports.DeleteQueryBuilder = exports.SelectQueryBuilder = exports.QueryBuilder = exports.ConnectionManager = exports.Connection = exports.ConnectionOptionsReader = void 0;
+exports.getMetadataArgsStorage = getMetadataArgsStorage;
+exports.getConnectionOptions = getConnectionOptions;
+exports.getConnectionManager = getConnectionManager;
+exports.createConnection = createConnection;
+exports.createConnections = createConnections;
+exports.getConnection = getConnection;
+exports.getManager = getManager;
+exports.getMongoManager = getMongoManager;
+exports.getSqljsManager = getSqljsManager;
+exports.getRepository = getRepository;
+exports.getTreeRepository = getTreeRepository;
+exports.getCustomRepository = getCustomRepository;
+exports.getMongoRepository = getMongoRepository;
+exports.createQueryBuilder = createQueryBuilder;
 const tslib_1 = require("tslib");
 /*!
  */
@@ -173,23 +187,20 @@ function getMetadataArgsStorage() {
         globalScope.typeormMetadataArgsStorage = new MetadataArgsStorage_1.MetadataArgsStorage();
     return globalScope.typeormMetadataArgsStorage;
 }
-exports.getMetadataArgsStorage = getMetadataArgsStorage;
 /**
  * Reads connection options stored in ormconfig configuration file.
  */
-function getConnectionOptions(connectionName = "default") {
-    return tslib_1.__awaiter(this, void 0, void 0, function* () {
+function getConnectionOptions() {
+    return tslib_1.__awaiter(this, arguments, void 0, function* (connectionName = "default") {
         return new ConnectionOptionsReader_1.ConnectionOptionsReader().get(connectionName);
     });
 }
-exports.getConnectionOptions = getConnectionOptions;
 /**
  * Gets a ConnectionManager which creates connections.
  */
 function getConnectionManager() {
     return (0, container_1.getFromContainer)(ConnectionManager_1.ConnectionManager);
 }
-exports.getConnectionManager = getConnectionManager;
 /**
  * Creates a new connection and registers it in the manager.
  *
@@ -204,7 +215,6 @@ function createConnection(optionsOrName) {
         return getConnectionManager().create(options).connect();
     });
 }
-exports.createConnection = createConnection;
 /**
  * Creates new connections and registers them in the manager.
  *
@@ -220,7 +230,6 @@ function createConnections(options) {
         return Promise.all(connections.map(connection => connection.connect()));
     });
 }
-exports.createConnections = createConnections;
 /**
  * Gets connection from the connection manager.
  * If connection name wasn't specified, then "default" connection will be retrieved.
@@ -228,7 +237,6 @@ exports.createConnections = createConnections;
 function getConnection(connectionName = "default") {
     return getConnectionManager().get(connectionName);
 }
-exports.getConnection = getConnection;
 /**
  * Gets entity manager from the connection.
  * If connection name wasn't specified, then "default" connection will be retrieved.
@@ -236,7 +244,6 @@ exports.getConnection = getConnection;
 function getManager(connectionName = "default") {
     return getConnectionManager().get(connectionName).manager;
 }
-exports.getManager = getManager;
 /**
  * Gets MongoDB entity manager from the connection.
  * If connection name wasn't specified, then "default" connection will be retrieved.
@@ -244,7 +251,6 @@ exports.getManager = getManager;
 function getMongoManager(connectionName = "default") {
     return getConnectionManager().get(connectionName).manager;
 }
-exports.getMongoManager = getMongoManager;
 /**
  * Gets Sqljs entity manager from connection name.
  * "default" connection is used, when no name is specified.
@@ -253,35 +259,30 @@ exports.getMongoManager = getMongoManager;
 function getSqljsManager(connectionName = "default") {
     return getConnectionManager().get(connectionName).manager;
 }
-exports.getSqljsManager = getSqljsManager;
 /**
  * Gets repository for the given entity class.
  */
 function getRepository(entityClass, connectionName = "default") {
     return getConnectionManager().get(connectionName).getRepository(entityClass);
 }
-exports.getRepository = getRepository;
 /**
  * Gets tree repository for the given entity class.
  */
 function getTreeRepository(entityClass, connectionName = "default") {
     return getConnectionManager().get(connectionName).getTreeRepository(entityClass);
 }
-exports.getTreeRepository = getTreeRepository;
 /**
  * Gets tree repository for the given entity class.
  */
 function getCustomRepository(customRepository, connectionName = "default") {
     return getConnectionManager().get(connectionName).getCustomRepository(customRepository);
 }
-exports.getCustomRepository = getCustomRepository;
 /**
  * Gets mongodb repository for the given entity class or name.
  */
 function getMongoRepository(entityClass, connectionName = "default") {
     return getConnectionManager().get(connectionName).getMongoRepository(entityClass);
 }
-exports.getMongoRepository = getMongoRepository;
 /**
  * Creates a new query builder.
  */
@@ -291,5 +292,4 @@ function createQueryBuilder(entityClass, alias, connectionName = "default") {
     }
     return getConnection(connectionName).createQueryBuilder();
 }
-exports.createQueryBuilder = createQueryBuilder;
 //# sourceMappingURL=index.js.map

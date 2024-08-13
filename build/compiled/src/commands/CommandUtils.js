@@ -18,8 +18,8 @@ class CommandUtils {
     /**
      * Creates a file with the given content in the given path.
      */
-    static createFile(filePath, content, override = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    static createFile(filePath_1, content_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (filePath, content, override = true) {
             yield CommandUtils.createDirectories(path.dirname(filePath));
             return new Promise((ok, fail) => {
                 if (override === false && fs.existsSync(filePath))

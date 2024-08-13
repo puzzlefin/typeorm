@@ -1,6 +1,3 @@
-/// <reference types="node" />
-/// <reference types="node" />
-/// <reference types="node" />
 import { EventEmitter, Readable, Writable } from "../../platform/PlatformTools";
 /**
  * Creates a new MongoClient instance.

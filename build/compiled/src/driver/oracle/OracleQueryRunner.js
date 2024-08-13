@@ -80,8 +80,8 @@ class OracleQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Starts transaction.
      */
-    startTransaction(isolationLevel = "READ COMMITTED") {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    startTransaction() {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (isolationLevel = "READ COMMITTED") {
             if (this.isReleased)
                 throw new QueryRunnerAlreadyReleasedError_1.QueryRunnerAlreadyReleasedError();
             if (this.isTransactionActive)
@@ -273,8 +273,8 @@ class OracleQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
             if (ifNotExist) {
                 const isTableExist = yield this.hasTable(table);
                 if (isTableExist)
@@ -303,8 +303,8 @@ class OracleQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drops the table.
      */
-    dropTable(tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(tableOrName_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
             // to perform drop queries for foreign keys and indices.
             if (ifExist) {
                 const isTableExist = yield this.hasTable(tableOrName);

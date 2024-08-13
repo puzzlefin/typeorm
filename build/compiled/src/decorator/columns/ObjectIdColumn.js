@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ObjectIdColumn = void 0;
+exports.ObjectIdColumn = ObjectIdColumn;
 const __1 = require("../../");
 /**
  * Special type of column that is available only for MongoDB database.
@@ -23,5 +23,4 @@ function ObjectIdColumn(options) {
         });
     };
 }
-exports.ObjectIdColumn = ObjectIdColumn;
 //# sourceMappingURL=ObjectIdColumn.js.map

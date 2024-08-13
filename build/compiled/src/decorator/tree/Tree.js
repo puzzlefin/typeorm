@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tree = void 0;
+exports.Tree = Tree;
 const __1 = require("../../");
 /**
  * Marks entity to work like a tree.
@@ -17,5 +17,4 @@ function Tree(type, options) {
         });
     };
 }
-exports.Tree = Tree;
 //# sourceMappingURL=Tree.js.map

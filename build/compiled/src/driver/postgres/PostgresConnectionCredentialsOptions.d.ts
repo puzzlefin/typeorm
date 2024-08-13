@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { TlsOptions } from "tls";
 /**
  * Postgres specific connection credential options.

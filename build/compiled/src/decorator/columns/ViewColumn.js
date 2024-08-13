@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewColumn = void 0;
+exports.ViewColumn = ViewColumn;
 const __1 = require("../../");
 /**
  * ViewColumn decorator is used to mark a specific class property as a view column.
@@ -15,5 +15,4 @@ function ViewColumn(options) {
         });
     };
 }
-exports.ViewColumn = ViewColumn;
 //# sourceMappingURL=ViewColumn.js.map

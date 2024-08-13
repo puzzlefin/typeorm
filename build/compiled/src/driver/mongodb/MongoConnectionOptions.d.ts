@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { BaseConnectionOptions } from "../../connection/BaseConnectionOptions";
 import { ReadPreference } from "./typings";
 /**

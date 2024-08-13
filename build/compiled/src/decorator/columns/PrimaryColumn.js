@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrimaryColumn = void 0;
+exports.PrimaryColumn = PrimaryColumn;
 const __1 = require("../../");
 const ColumnTypeUndefinedError_1 = require("../../error/ColumnTypeUndefinedError");
 const PrimaryColumnCannotBeNullableError_1 = require("../../error/PrimaryColumnCannotBeNullableError");
@@ -52,5 +52,4 @@ function PrimaryColumn(typeOrOptions, options) {
         }
     };
 }
-exports.PrimaryColumn = PrimaryColumn;
 //# sourceMappingURL=PrimaryColumn.js.map

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewEntity = void 0;
+exports.ViewEntity = ViewEntity;
 const __1 = require("../../");
 /**
  * This decorator is used to mark classes that will be an entity view.
@@ -22,5 +22,4 @@ function ViewEntity(nameOrOptions, maybeOptions) {
         });
     };
 }
-exports.ViewEntity = ViewEntity;
 //# sourceMappingURL=ViewEntity.js.map

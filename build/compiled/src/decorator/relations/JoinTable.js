@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JoinTable = void 0;
+exports.JoinTable = JoinTable;
 const __1 = require("../../");
 /**
  * JoinTable decorator is used in many-to-many relationship to specify owner side of relationship.
@@ -20,5 +20,4 @@ function JoinTable(options) {
         });
     };
 }
-exports.JoinTable = JoinTable;
 //# sourceMappingURL=JoinTable.js.map

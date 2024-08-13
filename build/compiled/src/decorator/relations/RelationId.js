@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RelationId = void 0;
+exports.RelationId = RelationId;
 const __1 = require("../../");
 /**
  * Special decorator used to extract relation id into separate entity property.
@@ -18,5 +18,4 @@ function RelationId(relation, alias, queryBuilderFactory) {
         });
     };
 }
-exports.RelationId = RelationId;
 //# sourceMappingURL=RelationId.js.map

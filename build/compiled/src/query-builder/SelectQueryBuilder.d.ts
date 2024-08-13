@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { ObjectLiteral } from "../common/ObjectLiteral";
 import { QueryBuilder } from "./QueryBuilder";
 import { ReadStream } from "../platform/PlatformTools";

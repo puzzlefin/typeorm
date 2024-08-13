@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateDateColumn = void 0;
+exports.UpdateDateColumn = UpdateDateColumn;
 const __1 = require("../../");
 /**
  * This column will store an update date of the updated object.
@@ -16,5 +16,4 @@ function UpdateDateColumn(options) {
         });
     };
 }
-exports.UpdateDateColumn = UpdateDateColumn;
 //# sourceMappingURL=UpdateDateColumn.js.map

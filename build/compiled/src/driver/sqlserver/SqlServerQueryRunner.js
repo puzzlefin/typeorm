@@ -445,8 +445,8 @@ class SqlServerQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
             if (ifNotExist) {
                 const isTableExist = yield this.hasTable(table);
                 if (isTableExist)
@@ -475,8 +475,8 @@ class SqlServerQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drops the table.
      */
-    dropTable(tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(tableOrName_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
             if (ifExist) {
                 const isTableExist = yield this.hasTable(tableOrName);
                 if (!isTableExist)
@@ -1649,7 +1649,7 @@ class SqlServerQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
                         columnNames: foreignKeys.map(dbFk => dbFk["COLUMN_NAME"]),
                         referencedTableName: referencedTableName,
                         referencedColumnNames: foreignKeys.map(dbFk => dbFk["REF_COLUMN"]),
-                        onDelete: dbForeignKey["ON_DELETE"].replace("_", " "),
+                        onDelete: dbForeignKey["ON_DELETE"].replace("_", " "), // SqlServer returns NO_ACTION, instead of NO ACTION
                         onUpdate: dbForeignKey["ON_UPDATE"].replace("_", " ") // SqlServer returns NO_ACTION, instead of NO ACTION
                     });
                 });

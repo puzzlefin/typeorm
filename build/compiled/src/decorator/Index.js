@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Index = void 0;
+exports.Index = Index;
 const __1 = require("../");
 /**
  * Creates a database index.
@@ -31,5 +31,4 @@ function Index(nameOrFieldsOrOptions, maybeFieldsOrOptions, maybeOptions) {
         });
     };
 }
-exports.Index = Index;
 //# sourceMappingURL=Index.js.map

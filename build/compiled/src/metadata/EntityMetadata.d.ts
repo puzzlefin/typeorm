@@ -18,6 +18,10 @@ import { TableType } from "./types/TableTypes";
 import { TreeType } from "./types/TreeTypes";
 import { UniqueMetadata } from "./UniqueMetadata";
 import { ClosureTreeOptions } from "./types/ClosureTreeOptions";
+export declare class ColumnNotFoundError extends Error {
+    column: string;
+    constructor(column: string);
+}
 /**
  * Contains all entity metadata.
  */

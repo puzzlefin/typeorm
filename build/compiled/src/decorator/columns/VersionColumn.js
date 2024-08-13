@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VersionColumn = void 0;
+exports.VersionColumn = VersionColumn;
 const __1 = require("../../");
 /**
  * This column will store a number - version of the entity.
@@ -17,5 +17,4 @@ function VersionColumn(options) {
         });
     };
 }
-exports.VersionColumn = VersionColumn;
 //# sourceMappingURL=VersionColumn.js.map

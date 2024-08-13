@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Transaction = void 0;
+exports.Transaction = Transaction;
 const __1 = require("../../");
 function Transaction(connectionOrOptions) {
     return function (target, methodName, descriptor) {
@@ -78,5 +78,4 @@ function Transaction(connectionOrOptions) {
         };
     };
 }
-exports.Transaction = Transaction;
 //# sourceMappingURL=Transaction.js.map

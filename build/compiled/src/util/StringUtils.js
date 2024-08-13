@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hash = exports.shorten = exports.abbreviate = exports.titleCase = exports.snakeCase = exports.camelCase = void 0;
+exports.camelCase = camelCase;
+exports.snakeCase = snakeCase;
+exports.titleCase = titleCase;
+exports.abbreviate = abbreviate;
+exports.shorten = shorten;
+exports.hash = hash;
 const tslib_1 = require("tslib");
 const sha_js_1 = tslib_1.__importDefault(require("sha.js"));
 /**
@@ -17,7 +22,6 @@ function camelCase(str, firstCapital = false) {
         return p1.toLowerCase();
     });
 }
-exports.camelCase = camelCase;
 /**
  * Converts string into snake_case.
  *
@@ -26,7 +30,6 @@ exports.camelCase = camelCase;
 function snakeCase(str) {
     return str.replace(/(?:([a-z])([A-Z]))|(?:((?!^)[A-Z])([a-z]))/g, "$1_$3$2$4").toLowerCase();
 }
-exports.snakeCase = snakeCase;
 /**
  * Converts string into Title Case.
  *
@@ -35,7 +38,6 @@ exports.snakeCase = snakeCase;
 function titleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
-exports.titleCase = titleCase;
 /**
  * Builds abbreviated string from given string;
  */
@@ -46,7 +48,6 @@ function abbreviate(str, abbrLettersCount = 1) {
         return res;
     }, "");
 }
-exports.abbreviate = abbreviate;
 /**
  * Shorten a given `input`. Useful for RDBMS imposing a limit on the
  * maximum length of aliases and column names in SQL queries.
@@ -83,7 +84,6 @@ function shorten(input, options = {}) {
     }, []);
     return shortSegments.join(separator);
 }
-exports.shorten = shorten;
 /**
  * Returns a hashed input.
  *
@@ -99,5 +99,4 @@ function hash(input, options = {}) {
     }
     return hashedInput;
 }
-exports.hash = hash;
 //# sourceMappingURL=StringUtils.js.map

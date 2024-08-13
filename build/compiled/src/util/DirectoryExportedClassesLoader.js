@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.importJsonsFromDirectories = exports.importClassesFromDirectories = void 0;
+exports.importClassesFromDirectories = importClassesFromDirectories;
+exports.importJsonsFromDirectories = importJsonsFromDirectories;
 const tslib_1 = require("tslib");
 const glob_1 = tslib_1.__importDefault(require("glob"));
 const PlatformTools_1 = require("../platform/PlatformTools");
@@ -41,7 +42,6 @@ function importClassesFromDirectories(logger, directories, formats = [".js", ".c
         .map(file => require(PlatformTools_1.PlatformTools.pathResolve(file)));
     return loadFileClasses(dirs, []);
 }
-exports.importClassesFromDirectories = importClassesFromDirectories;
 /**
  * Loads all json files from the given directory.
  */
@@ -53,5 +53,4 @@ function importJsonsFromDirectories(directories, format = ".json") {
         .filter(file => PlatformTools_1.PlatformTools.pathExtname(file) === format)
         .map(file => require(PlatformTools_1.PlatformTools.pathResolve(file)));
 }
-exports.importJsonsFromDirectories = importJsonsFromDirectories;
 //# sourceMappingURL=DirectoryExportedClassesLoader.js.map

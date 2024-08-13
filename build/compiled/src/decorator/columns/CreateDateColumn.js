@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateDateColumn = void 0;
+exports.CreateDateColumn = CreateDateColumn;
 const __1 = require("../../");
 /**
  * This column will store a creation date of the inserted object.
@@ -17,5 +17,4 @@ function CreateDateColumn(options) {
         });
     };
 }
-exports.CreateDateColumn = CreateDateColumn;
 //# sourceMappingURL=CreateDateColumn.js.map

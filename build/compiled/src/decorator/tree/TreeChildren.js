@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TreeChildren = void 0;
+exports.TreeChildren = TreeChildren;
 const __1 = require("../../");
 /**
  * Marks a entity property as a children of the tree.
@@ -25,5 +25,4 @@ function TreeChildren(options) {
         });
     };
 }
-exports.TreeChildren = TreeChildren;
 //# sourceMappingURL=TreeChildren.js.map

@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export { ReadStream } from "fs";
 export { EventEmitter } from "events";
 export { Readable, Writable } from "stream";

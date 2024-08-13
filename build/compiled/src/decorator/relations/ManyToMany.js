@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ManyToMany = void 0;
+exports.ManyToMany = ManyToMany;
 const __1 = require("../../");
 /**
  * Many-to-many is a type of relationship when Entity1 can have multiple instances of Entity2, and Entity2 can have
@@ -38,5 +38,4 @@ function ManyToMany(typeFunctionOrTarget, inverseSideOrOptions, options) {
         });
     };
 }
-exports.ManyToMany = ManyToMany;
 //# sourceMappingURL=ManyToMany.js.map

@@ -52,3 +52,8 @@ July 6, 2023
 
 Realized since we are using this directly, don't use the packages directory,
 everything gets copied in there and makes life hell.
+
+Aug 12, 2024
+
+Added ColumnNotFoundError so you can't specify column names that don't exist
+in finds/updates/deletes

@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { TlsOptions } from "tls";
 /**
  * Cockroachdb specific connection credential options.

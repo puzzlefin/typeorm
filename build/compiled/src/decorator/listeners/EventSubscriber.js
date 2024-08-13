@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EventSubscriber = void 0;
+exports.EventSubscriber = EventSubscriber;
 const __1 = require("../../");
 /**
  * Classes decorated with this decorator will listen to ORM events and their methods will be triggered when event
@@ -13,5 +13,4 @@ function EventSubscriber() {
         });
     };
 }
-exports.EventSubscriber = EventSubscriber;
 //# sourceMappingURL=EventSubscriber.js.map

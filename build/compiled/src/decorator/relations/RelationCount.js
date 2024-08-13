@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RelationCount = void 0;
+exports.RelationCount = RelationCount;
 const __1 = require("../../");
 /**
  * Holds a number of children in the closure table of the column.
@@ -18,5 +18,4 @@ function RelationCount(relation, alias, queryBuilderFactory) {
         });
     };
 }
-exports.RelationCount = RelationCount;
 //# sourceMappingURL=RelationCount.js.map

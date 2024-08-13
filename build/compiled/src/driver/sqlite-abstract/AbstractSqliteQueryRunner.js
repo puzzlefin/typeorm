@@ -211,8 +211,8 @@ class AbstractSqliteQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true, createIndices = true) {
             const upQueries = [];
             const downQueries = [];
             if (ifNotExist) {
@@ -237,8 +237,8 @@ class AbstractSqliteQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drops the table.
      */
-    dropTable(tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(tableOrName_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (tableOrName, ifExist, dropForeignKeys = true, dropIndices = true) {
             if (ifExist) {
                 const isTableExist = yield this.hasTable(tableOrName);
                 if (!isTableExist)
@@ -1075,8 +1075,8 @@ class AbstractSqliteQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
             c += " DEFAULT (" + column.default + ")";
         return c;
     }
-    recreateTable(newTable, oldTable, migrateData = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    recreateTable(newTable_1, oldTable_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (newTable, oldTable, migrateData = true) {
             const upQueries = [];
             const downQueries = [];
             // drop old table indices

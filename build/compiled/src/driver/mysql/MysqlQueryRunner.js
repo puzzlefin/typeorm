@@ -281,8 +281,8 @@ class MysqlQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Creates a new table.
      */
-    createTable(table, ifNotExist = false, createForeignKeys = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    createTable(table_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (table, ifNotExist = false, createForeignKeys = true) {
             if (ifNotExist) {
                 const isTableExist = yield this.hasTable(table);
                 if (isTableExist)
@@ -307,8 +307,8 @@ class MysqlQueryRunner extends BaseQueryRunner_1.BaseQueryRunner {
     /**
      * Drop the table.
      */
-    dropTable(target, ifExist, dropForeignKeys = true) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+    dropTable(target_1, ifExist_1) {
+        return tslib_1.__awaiter(this, arguments, void 0, function* (target, ifExist, dropForeignKeys = true) {
             // It needs because if table does not exist and dropForeignKeys or dropIndices is true, we don't need
             // to perform drop queries for foreign keys and indices.
             if (ifExist) {

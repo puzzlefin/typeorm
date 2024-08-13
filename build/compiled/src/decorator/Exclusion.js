@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Exclusion = void 0;
+exports.Exclusion = Exclusion;
 const __1 = require("../");
 /**
  * Creates a database exclusion.
@@ -20,5 +20,4 @@ function Exclusion(nameOrExpression, maybeExpression) {
         });
     };
 }
-exports.Exclusion = Exclusion;
 //# sourceMappingURL=Exclusion.js.map

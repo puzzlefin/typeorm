@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BeforeRemove = void 0;
+exports.BeforeRemove = BeforeRemove;
 const __1 = require("../../");
 const EventListenerTypes_1 = require("../../metadata/types/EventListenerTypes");
 /**
@@ -15,5 +15,4 @@ function BeforeRemove() {
         });
     };
 }
-exports.BeforeRemove = BeforeRemove;
 //# sourceMappingURL=BeforeRemove.js.map

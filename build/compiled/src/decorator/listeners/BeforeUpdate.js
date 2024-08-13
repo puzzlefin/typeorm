@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BeforeUpdate = void 0;
+exports.BeforeUpdate = BeforeUpdate;
 const __1 = require("../../");
 const EventListenerTypes_1 = require("../../metadata/types/EventListenerTypes");
 /**
@@ -15,5 +15,4 @@ function BeforeUpdate() {
         });
     };
 }
-exports.BeforeUpdate = BeforeUpdate;
 //# sourceMappingURL=BeforeUpdate.js.map
