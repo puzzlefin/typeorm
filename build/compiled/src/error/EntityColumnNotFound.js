@@ -5,8 +5,10 @@ exports.EntityColumnNotFound = void 0;
  *
  */
 class EntityColumnNotFound extends Error {
-    constructor(propertyPath) {
+    constructor(propertyPath, extra) {
         super();
+        this.propertyPath = propertyPath;
+        this.extra = extra;
         this.name = "EntityColumnNotFound";
         Object.setPrototypeOf(this, EntityColumnNotFound.prototype);
         this.message = `No entity column "${propertyPath}" was found.`;

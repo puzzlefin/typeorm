@@ -2036,7 +2036,7 @@ export class SelectQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
                     const aliasName = criteriaParts[0];
                     const propertyPath = criteriaParts.slice(1).join(".");
                     const alias = this.expressionMap.findAliasByName(aliasName);
-                    const column = alias.metadata.findColumnWithPropertyPath(propertyPath);
+                    const column = alias.metadata.findColumnWithPropertyPath(propertyPath, orderBys);
                     return this.escape(parentAlias) + "." + this.escape(DriverUtils.buildColumnAlias(this.connection.driver, aliasName, column!.databaseName));
                 } else {
                     if (this.expressionMap.selects.find(select => select.selection === orderCriteria || select.aliasName === orderCriteria))
@@ -2054,7 +2054,7 @@ export class SelectQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
                 const aliasName = criteriaParts[0];
                 const propertyPath = criteriaParts.slice(1).join(".");
                 const alias = this.expressionMap.findAliasByName(aliasName);
-                const column = alias.metadata.findColumnWithPropertyPath(propertyPath);
+                const column = alias.metadata.findColumnWithPropertyPath(propertyPath, orderBys);
                 orderByObject[this.escape(parentAlias) + "." + this.escape(DriverUtils.buildColumnAlias(this.connection.driver, aliasName, column!.databaseName))] = orderBys[orderCriteria];
             } else {
                 if (this.expressionMap.selects.find(select => select.selection === orderCriteria || select.aliasName === orderCriteria)) {

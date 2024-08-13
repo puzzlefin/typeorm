@@ -57,3 +57,8 @@ Aug 12, 2024
 
 Added ColumnNotFoundError so you can't specify column names that don't exist
 in finds/updates/deletes
+
+Aug 13, 2024
+
+Change ColumnNotFoundError to EntityColumnNotFound.ts
+Add some debugging fields

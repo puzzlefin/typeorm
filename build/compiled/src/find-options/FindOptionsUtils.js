@@ -78,7 +78,7 @@ class FindOptionsUtils {
         if (options.select) {
             qb.select([]);
             options.select.forEach(select => {
-                if (!metadata.findColumnWithPropertyPath(String(select)))
+                if (!metadata.findColumnWithPropertyPath(String(select), qb))
                     throw new Error(`${String(select)} column was not found in the ${metadata.name} entity.`);
                 qb.addSelect(qb.alias + "." + String(select));
             });
@@ -92,7 +92,7 @@ class FindOptionsUtils {
         if (options.order)
             Object.keys(options.order).forEach(key => {
                 const order = options.order[key];
-                if (!metadata.findColumnWithPropertyPath(key))
+                if (!metadata.findColumnWithPropertyPath(key, qb))
                     throw new Error(`${key} column was not found in the ${metadata.name} entity.`);
                 switch (order) {
                     case 1:
