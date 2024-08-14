@@ -239,7 +239,7 @@ export class MigrationExecutor {
 
                  this.puzzleLogger?.info(`Running migration`, {name: migration.name});
                 try {
-                    await migration.instance!.up(queryRunner)
+                    await migration.instance!.up(queryRunner);
                     // now when migration is executed we need to insert record about it into the database
                     await this.insertExecutedMigration(queryRunner, migration);
                     // commit transaction if we started it

@@ -18,6 +18,7 @@ class ConnectionOptionsEnvReader {
      */
     read() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            var _a;
             return [{
                     type: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_CONNECTION") || (PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_URL") ? PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_URL").split("://")[0] : undefined),
                     url: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_URL"),
@@ -45,6 +46,7 @@ class ConnectionOptionsEnvReader {
                         entitiesDir: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_ENTITIES_DIR"),
                         migrationsDir: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_MIGRATIONS_DIR"),
                         subscribersDir: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_SUBSCRIBERS_DIR"),
+                        transaction: (_a = PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_TRANSACTION_MODE")) !== null && _a !== void 0 ? _a : "all",
                     },
                     cache: this.transformCaching(),
                     uuidExtension: PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_UUID_EXTENSION")

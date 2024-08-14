@@ -173,6 +173,11 @@ export interface BaseConnectionOptions {
          */
         readonly subscribersDir?: string;
 
+        /**
+         * Transaction mode
+         */
+        readonly transaction: "all" | "each" | "none";
+
     };
 
 }
