@@ -19,4 +19,16 @@ export interface MigrationInterface {
      */
     down(queryRunner: QueryRunner): Promise<any>;
 
+    /**
+     * Run the migrations pre/post hooks.
+     */
+    upPreTransaction?(queryRunner: QueryRunner): Promise<any>;
+    upPostTransaction?(queryRunner: QueryRunner): Promise<any>;
+
+    /**
+     * Reverse the migrations pre/post hooks.
+     */
+    downPreTransaction?(queryRunner: QueryRunner): Promise<any>;
+    downPostTransaction?(queryRunner: QueryRunner): Promise<any>;
+
 }
