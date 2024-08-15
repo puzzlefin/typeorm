@@ -143,5 +143,9 @@ export interface BaseConnectionOptions {
          * Directory where subscribers should be created by default.
          */
         readonly subscribersDir?: string;
+        /**
+         * Transaction mode
+         */
+        readonly transaction?: "each" | "all" | "none";
     };
 }

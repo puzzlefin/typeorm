@@ -58,7 +58,8 @@ export class MigrationRunCommand implements yargs.CommandModule {
                 transaction: "all" as "all" | "none" | "each",
             };
 
-            switch (args.t) {
+            const transactionMode = args.t !== "default" ? args.t : connectionOptions.cli?.transaction;
+            switch (transactionMode) {
                 case "all":
                     options.transaction = "all";
                     break;

@@ -35,6 +35,7 @@ class MigrationRunCommand {
     }
     handler(args) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            var _a;
             if (args._[0] === "migrations:run") {
                 console.log("'migrations:run' is deprecated, please use 'migration:run' instead");
             }
@@ -56,7 +57,8 @@ class MigrationRunCommand {
                 const options = {
                     transaction: "all",
                 };
-                switch (args.t) {
+                const transactionMode = args.t !== "default" ? args.t : (_a = connectionOptions.cli) === null || _a === void 0 ? void 0 : _a.transaction;
+                switch (transactionMode) {
                     case "all":
                         options.transaction = "all";
                         break;

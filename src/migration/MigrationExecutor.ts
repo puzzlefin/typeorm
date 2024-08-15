@@ -226,6 +226,12 @@ export class MigrationExecutor {
         // run all pending migrations in a sequence
         try {
             for (const migration of pendingMigrations) {
+                if (migration.instance!.upPreTransaction && this.transaction === "all" && transactionStartedByUs) {
+                    this.connection.logger.logSchemaBuild(`Migration ${migration.name} has an upPreTransaction but in "all" mode.`);
+                }
+                if (migration.instance!.upPreTransaction) {
+                  await migration.instance!.upPreTransaction(queryRunner);
+                }
                 if (this.transaction === "each" && !queryRunner.isTransactionActive) {
                     await queryRunner.startTransaction();
                     transactionStartedByUs = true;
@@ -233,27 +239,34 @@ export class MigrationExecutor {
 
                  this.puzzleLogger?.info(`Running migration`, {name: migration.name});
                 try {
-                    await migration.instance!.up(queryRunner)
-                        .then(async () => { // now when migration is executed we need to insert record about it into the database
-                            await this.insertExecutedMigration(queryRunner, migration);
-                            // commit transaction if we started it
-                            if (this.transaction === "each" && transactionStartedByUs)
+                    await migration.instance!.up(queryRunner);
+                    // commit transaction if we started it
+                    if (this.transaction === "each" && transactionStartedByUs) {
                                 await queryRunner.commitTransaction();
-                        })
-                        .then(() => { // informative log about migration success
-                            successMigrations.push(migration);
-                            this.connection.logger.logSchemaBuild(`Migration ${migration.name} has been executed successfully.`);
-                        });
-                    } catch(e) {
-                        this.connection.logger.logSchemaBuild(`Migration ${migration.name} has failed.`);
-                        this.puzzleLogger?.error(`Failed migration`, {name: migration.name});
-                        throw e;
                     }
+                } catch(e) {
+                    this.connection.logger.logSchemaBuild(`Migration ${migration.name} has failed.`);
+                    this.puzzleLogger?.error(`Failed migration`, {name: migration.name});
+                    throw e;
+                }
+
+                if (migration.instance!.upPostTransaction && this.transaction === "all" && transactionStartedByUs) {
+                    this.connection.logger.logSchemaBuild(`Migration ${migration.name} has an upPostTransaction but in "all" mode.`);
+                }
+                if (migration.instance!.upPostTransaction) {
+                  await migration.instance!.upPostTransaction(queryRunner);
+                }
+
+                // now when migration is executed we need to insert record about it into the database
+                await this.insertExecutedMigration(queryRunner, migration);
+                successMigrations.push(migration);
+                this.connection.logger.logSchemaBuild(`Migration ${migration.name} has been executed successfully.`);
             }
 
             // commit transaction if we started it
-            if (this.transaction === "all" && transactionStartedByUs)
+            if (this.transaction === "all" && transactionStartedByUs) {
                 await queryRunner.commitTransaction();
+            }
 
         } catch (err) { // rollback transaction if we started it
             if (transactionStartedByUs) {
@@ -313,6 +326,10 @@ export class MigrationExecutor {
 
         // start transaction if its not started yet
         let transactionStartedByUs = false;
+
+        if (migrationToRevert.instance!.downPreTransaction) {
+          await migrationToRevert.instance!.downPreTransaction(queryRunner);
+        }
         if ((this.transaction !== "none") && !queryRunner.isTransactionActive) {
             await queryRunner.startTransaction();
             transactionStartedByUs = true;
@@ -324,8 +341,12 @@ export class MigrationExecutor {
             this.connection.logger.logSchemaBuild(`Migration ${migrationToRevert.name} has been reverted successfully.`);
 
             // commit transaction if we started it
-            if (transactionStartedByUs)
+            if (transactionStartedByUs) {
                 await queryRunner.commitTransaction();
+            }
+            if (migrationToRevert.instance!.downPostTransaction) {
+              await migrationToRevert.instance!.downPostTransaction(queryRunner);
+            }
 
         } catch (err) { // rollback transaction if we started it
             if (transactionStartedByUs) {

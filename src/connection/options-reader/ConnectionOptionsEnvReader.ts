@@ -44,6 +44,7 @@ export class ConnectionOptionsEnvReader {
                 entitiesDir: PlatformTools.getEnvVariable("TYPEORM_ENTITIES_DIR"),
                 migrationsDir: PlatformTools.getEnvVariable("TYPEORM_MIGRATIONS_DIR"),
                 subscribersDir: PlatformTools.getEnvVariable("TYPEORM_SUBSCRIBERS_DIR"),
+                transaction: PlatformTools.getEnvVariable("TYPEORM_TRANSACTION_MODE") ?? "all",
             },
             cache: this.transformCaching(),
             uuidExtension: PlatformTools.getEnvVariable("TYPEORM_UUID_EXTENSION")
