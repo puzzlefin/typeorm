@@ -240,8 +240,6 @@ export class MigrationExecutor {
                  this.puzzleLogger?.info(`Running migration`, {name: migration.name});
                 try {
                     await migration.instance!.up(queryRunner);
-                    // now when migration is executed we need to insert record about it into the database
-                    await this.insertExecutedMigration(queryRunner, migration);
                     // commit transaction if we started it
                     if (this.transaction === "each" && transactionStartedByUs) {
                                 await queryRunner.commitTransaction();
@@ -258,6 +256,9 @@ export class MigrationExecutor {
                 if (migration.instance!.upPostTransaction) {
                   await migration.instance!.upPostTransaction(queryRunner);
                 }
+
+                // now when migration is executed we need to insert record about it into the database
+                await this.insertExecutedMigration(queryRunner, migration);
                 successMigrations.push(migration);
                 this.connection.logger.logSchemaBuild(`Migration ${migration.name} has been executed successfully.`);
             }
