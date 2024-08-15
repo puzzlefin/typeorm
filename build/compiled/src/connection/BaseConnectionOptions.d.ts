@@ -146,6 +146,6 @@ export interface BaseConnectionOptions {
         /**
          * Transaction mode
          */
-        readonly transaction: "all" | "each" | "none";
+        readonly transaction?: "each" | "all" | "none";
     };
 }
