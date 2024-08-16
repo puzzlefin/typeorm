@@ -62,3 +62,6 @@ Aug 13, 2024
 
 Change ColumnNotFoundError to EntityColumnNotFound.ts
 Add some debugging fields
+
+Aug 16, 2024
+Now throwing exceptions on all bad columns

@@ -9,22 +9,13 @@ const CannotCreateEntityIdMapError_1 = require("../error/CannotCreateEntityIdMap
 const OrmUtils_1 = require("../util/OrmUtils");
 const StringUtils_1 = require("../util/StringUtils");
 const EntityColumnNotFound_1 = require("../error/EntityColumnNotFound");
-const PlatformTools_1 = require("../platform/PlatformTools");
 const LoggerFactory_1 = require("../logger/LoggerFactory");
-const throwOrLogMissingColumn = (propertyPath, debug) => {
-    const env = PlatformTools_1.PlatformTools.getEnvVariable("GATEWAY_ENV");
-    const throwEnv = PlatformTools_1.PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
-    const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
+const throwAndLogMissingColumn = (propertyPath, debug) => {
     const e = new EntityColumnNotFound_1.EntityColumnNotFound(propertyPath, debug);
     const extra = e.stack ? e.stack.toString() : e.toString();
-    if (yesThrow) {
-        throw e;
-    }
-    else {
-        const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");
-        logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
-        return undefined;
-    }
+    const logger = (new LoggerFactory_1.LoggerFactory()).create("advanced-console", "all");
+    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
+    throw e;
 };
 /**
  * Contains all entity metadata.
@@ -357,7 +348,7 @@ class EntityMetadata {
         if (column) {
             return column;
         }
-        throwOrLogMissingColumn(propertyName, debug);
+        throwAndLogMissingColumn(propertyName, debug);
         return undefined;
     }
     /**
@@ -382,7 +373,7 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
     /**
@@ -398,7 +389,7 @@ class EntityMetadata {
         const relation = this.relations.find(relation => relation.propertyPath === propertyPath);
         if (relation && relation.joinColumns)
             return relation.joinColumns;
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return [];
     }
     /**
@@ -409,7 +400,7 @@ class EntityMetadata {
         if (relation) {
             return relation;
         }
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
     /**
@@ -426,7 +417,7 @@ class EntityMetadata {
         if (embedded) {
             return embedded;
         }
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
     /**

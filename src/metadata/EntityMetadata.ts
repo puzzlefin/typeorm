@@ -28,25 +28,16 @@ import {TreeType} from "./types/TreeTypes";
 import {UniqueMetadata} from "./UniqueMetadata";
 import {ClosureTreeOptions} from "./types/ClosureTreeOptions";
 import {EntityColumnNotFound} from "../error/EntityColumnNotFound";
-import { PlatformTools } from "../platform/PlatformTools";
 import { LoggerFactory } from "../logger/LoggerFactory";
 
-const throwOrLogMissingColumn = (propertyPath: string, debug?: any) => {
-  const env = PlatformTools.getEnvVariable("GATEWAY_ENV");
-  const throwEnv = PlatformTools.getEnvVariable("TYPEORM_THROW_ON_UNKNOWN_COLUMNS");
-
-  const yesThrow = throwEnv || !(['production', 'staging'].includes(env));
-
+const throwAndLogMissingColumn = (propertyPath: string, debug?: any) => {
   const e = new EntityColumnNotFound(propertyPath, debug);
   const extra = e.stack ? e.stack.toString() : e.toString();
 
-  if (yesThrow) {
-    throw e;
-  } else {
-    const logger = (new LoggerFactory()).create("advanced-console", "all");
-    logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
-    return undefined;
-  }
+  const logger = (new LoggerFactory()).create("advanced-console", "all");
+  logger.log("warn", `TYPEORM QUERY ERROR UNKNOWN COLUMN: ${propertyPath}: ${extra}`);
+
+  throw e;
 }
 
 /**
@@ -658,7 +649,7 @@ export class EntityMetadata {
         if (column) {
           return column;
         }
-        throwOrLogMissingColumn(propertyName, debug);
+        throwAndLogMissingColumn(propertyName, debug);
         return undefined;
     }
 
@@ -687,7 +678,7 @@ export class EntityMetadata {
         if (relation && relation.joinColumns.length === 1)
             return relation.joinColumns[0];
 
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
 
@@ -706,7 +697,7 @@ export class EntityMetadata {
         if (relation && relation.joinColumns)
             return relation.joinColumns;
 
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return [];
     }
 
@@ -718,7 +709,7 @@ export class EntityMetadata {
         if (relation) {
           return relation;
         }
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
 
@@ -737,7 +728,7 @@ export class EntityMetadata {
         if (embedded) {
           return embedded;
         }
-        throwOrLogMissingColumn(propertyPath, debug);
+        throwAndLogMissingColumn(propertyPath, debug);
         return undefined;
     }
 
