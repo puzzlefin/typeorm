@@ -93,7 +93,7 @@ export interface BaseConnectionOptions {
      */
     readonly extra?: any;
     /**
-      * timeout for migrations in ms
+      * timeout for migrations in seconds
     */
     readonly migrationStatementTimeout?: number;
     /**
