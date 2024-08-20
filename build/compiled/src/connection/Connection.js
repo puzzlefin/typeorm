@@ -194,6 +194,9 @@ class Connection {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             if (!this.isConnected)
                 throw new CannotExecuteNotConnectedError_1.CannotExecuteNotConnectedError(this.name);
+            if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
+                yield this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+            }
             const migrationExecutor = new MigrationExecutor_1.MigrationExecutor(this);
             migrationExecutor.transaction = (options && options.transaction) || "all";
             const successMigrations = yield migrationExecutor.executePendingMigrations();
@@ -208,6 +211,9 @@ class Connection {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             if (!this.isConnected)
                 throw new CannotExecuteNotConnectedError_1.CannotExecuteNotConnectedError(this.name);
+            if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
+                yield this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+            }
             const migrationExecutor = new MigrationExecutor_1.MigrationExecutor(this);
             migrationExecutor.transaction = (options && options.transaction) || "all";
             yield migrationExecutor.undoLastMigration();

@@ -93,6 +93,10 @@ export interface BaseConnectionOptions {
      */
     readonly extra?: any;
     /**
+      * timeout for migrations in ms
+    */
+    readonly migrationStatementTimeout?: number;
+    /**
      * Allows to setup cache options.
      */
     readonly cache?: boolean | {

@@ -287,6 +287,10 @@ export class Connection {
         if (!this.isConnected)
             throw new CannotExecuteNotConnectedError(this.name);
 
+        if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
+            await this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+        }
+
         const migrationExecutor = new MigrationExecutor(this);
         migrationExecutor.transaction = (options && options.transaction) || "all";
 
@@ -302,6 +306,10 @@ export class Connection {
 
         if (!this.isConnected)
             throw new CannotExecuteNotConnectedError(this.name);
+
+        if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
+            await this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+        }
 
         const migrationExecutor = new MigrationExecutor(this);
         migrationExecutor.transaction = (options && options.transaction) || "all";

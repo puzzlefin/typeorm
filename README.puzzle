@@ -65,3 +65,7 @@ Add some debugging fields
 
 Aug 16, 2024
 Now throwing exceptions on all bad columns
+
+Aug 20, 2024
+
+Add migrationStatementTimeout
