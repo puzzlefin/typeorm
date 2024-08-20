@@ -288,7 +288,7 @@ export class Connection {
             throw new CannotExecuteNotConnectedError(this.name);
 
         if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
-            await this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+            await this.query(`SET statement_timeout = '${this.options.migrationStatementTimeout}s'`);
         }
 
         const migrationExecutor = new MigrationExecutor(this);
@@ -308,7 +308,7 @@ export class Connection {
             throw new CannotExecuteNotConnectedError(this.name);
 
         if (this.options.migrationStatementTimeout && this.options.migrationStatementTimeout > 0) {
-            await this.query(`SET statement_timeout = ${this.options.migrationStatementTimeout}ms`);
+            await this.query(`SET statement_timeout = '${this.options.migrationStatementTimeout}s'`);
         }
 
         const migrationExecutor = new MigrationExecutor(this);
