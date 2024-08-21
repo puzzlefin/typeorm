@@ -69,3 +69,8 @@ Now throwing exceptions on all bad columns
 Aug 20, 2024
 
 Add migrationStatementTimeout
+
+Aug 21, 2024
+
+Use migrationsTransactionMode for command line too so we can utilize "each" and guarantee it works
+the same whether from command line or from running the app (same config)
