@@ -67,7 +67,8 @@ class MigrationRunCommand {
                     case "each":
                         options.transaction = "each";
                         break;
-                    default:
+                    default: // If there is no command line transaction, use the one from the connections options so it is the same as the running app or fallback to "all"
+                        options.transaction = connectionOptions.migrationsTransactionMode ? connectionOptions.migrationsTransactionMode : "all";
                     // noop
                 }
                 yield connection.runMigrations(options);
