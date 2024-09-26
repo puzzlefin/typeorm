@@ -13,8 +13,16 @@ const SqljsDriver_1 = require("../driver/sqljs/SqljsDriver");
 const MysqlDriver_1 = require("../driver/mysql/MysqlDriver");
 const BroadcasterResult_1 = require("../subscriber/BroadcasterResult");
 const index_1 = require("../index");
+const SelectQueryBuilder_1 = require("./SelectQueryBuilder");
 const AuroraDataApiDriver_1 = require("../driver/aurora-data-api/AuroraDataApiDriver");
 const BetterSqlite3Driver_1 = require("../driver/better-sqlite3/BetterSqlite3Driver");
+class UsingProperty {
+    constructor(entityOrProperty, alias) {
+        this.entityOrProperty = entityOrProperty;
+        this.alias = alias;
+    }
+    ;
+}
 /**
  * Allows to build complex sql queries in a fashion way and execute those queries.
  */
@@ -199,24 +207,53 @@ class DeleteQueryBuilder extends QueryBuilder_1.QueryBuilder {
         this.expressionMap.returning = returning;
         return this;
     }
+    /**
+     * Using
+     * You also need to specify an alias of the joined data.
+     */
+    using(entityOrProperty, aliasName) {
+        if (this.usingProp) {
+            throw new Error("Cannot use USING more than once");
+        }
+        this.usingProp = new UsingProperty(entityOrProperty, aliasName);
+        return this;
+    }
     // -------------------------------------------------------------------------
     // Protected Methods
     // -------------------------------------------------------------------------
+    createUsingExpression() {
+        if (!this.usingProp) {
+            return "";
+        }
+        const alias = this.usingProp.alias ? ` AS ${this.escape(this.usingProp.alias)} ` : "";
+        let result = " USING ";
+        if (this.usingProp.entityOrProperty instanceof Function) {
+            const qb = new SelectQueryBuilder_1.SelectQueryBuilder(this.connection);
+            this.usingProp.entityOrProperty(qb);
+            result += "(" + qb.getQuery() + ")";
+            this.setParameters(qb.getParameters());
+        }
+        else {
+            result += this.escape(this.usingProp.entityOrProperty);
+        }
+        return ` USING ${result} ${alias} `;
+    }
     /**
      * Creates DELETE express used to perform query.
      */
     createDeleteExpression() {
         const tableName = this.getTableName(this.getMainTableName());
+        const usingExpression = this.createUsingExpression();
         const whereExpression = this.createWhereExpression();
         const returningExpression = this.createReturningExpression();
         if (returningExpression && (this.connection.driver instanceof PostgresDriver_1.PostgresDriver || this.connection.driver instanceof CockroachDriver_1.CockroachDriver)) {
-            return `DELETE FROM ${tableName}${whereExpression} RETURNING ${returningExpression}`;
+            return `DELETE FROM ${tableName}${usingExpression}${whereExpression} RETURNING ${returningExpression}`;
         }
         else if (returningExpression !== "" && this.connection.driver instanceof SqlServerDriver_1.SqlServerDriver) {
-            return `DELETE FROM ${tableName} OUTPUT ${returningExpression}${whereExpression}`;
+            return `DELETE FROM ${tableName} OUTPUT ${returningExpression}${usingExpression}${whereExpression}`;
         }
         else {
-            return `DELETE FROM ${tableName}${whereExpression}`;
+            return `DELETE FROM ${tableName}${usingExpression}${whereExpression}`;
         }
     }
 }
