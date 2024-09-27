@@ -291,7 +291,7 @@ export class DeleteQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
     const hasEntityMetaData = this.connection.hasMetadata(this.usingProp.entityOrProperty);
     if (hasEntityMetaData) {
         const entityMetadata = this.connection.getMetadata(this.usingProp.entityOrProperty);
-        result = result + entityMetadata.tableName;
+        result = result + this.escape(entityMetadata.tableName);
     }
     else
       if (this.usingProp.entityOrProperty instanceof Function) {
