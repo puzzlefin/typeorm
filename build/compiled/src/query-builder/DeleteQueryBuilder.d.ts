@@ -6,10 +6,12 @@ import { QueryRunner } from "../query-runner/QueryRunner";
 import { WhereExpression } from "./WhereExpression";
 import { Brackets } from "./Brackets";
 import { DeleteResult } from "./result/DeleteResult";
+import { SelectQueryBuilder } from "./SelectQueryBuilder";
 /**
  * Allows to build complex sql queries in a fashion way and execute those queries.
  */
 export declare class DeleteQueryBuilder<Entity extends ObjectLiteral> extends QueryBuilder<Entity> implements WhereExpression {
+    private usingProp;
     constructor(connectionOrQueryBuilder: Connection | QueryBuilder<any>, queryRunner?: QueryRunner);
     /**
      * Gets generated sql query without parameters being replaced.
@@ -81,6 +83,12 @@ export declare class DeleteQueryBuilder<Entity extends ObjectLiteral> extends Qu
      * Optional returning/output clause.
      */
     returning(returning: string | string[]): this;
+    /**
+     * Using
+     * You also need to specify an alias of the joined data.
+     */
+    using(entityOrProperty: Function | string | ((qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>), aliasName: string): this;
+    protected createUsingExpression(): string;
     /**
      * Creates DELETE express used to perform query.
      */

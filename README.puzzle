@@ -74,3 +74,7 @@ Aug 21, 2024
 
 Use migrationsTransactionMode for command line too so we can utilize "each" and guarantee it works
 the same whether from command line or from running the app (same config)
+
+Sep 26, 2024
+
+Added "USING" support for deletes
