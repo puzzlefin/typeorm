@@ -287,7 +287,13 @@ export class DeleteQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
       }         
       const alias = this.usingProp.alias ? ` AS ${this.escape(this.usingProp.alias)} ` : "";
       
-      let result =  " USING ";
+      let result =  "";
+    const hasEntityMetaData = this.connection.hasMetadata(this.usingProp.entityOrProperty);
+    if (hasEntityMetaData) {
+        const entityMetadata = this.connection.getMetadata(this.usingProp.entityOrProperty);
+        result = result + entityMetadata.tableName;
+    }
+    else
       if (this.usingProp.entityOrProperty instanceof Function) {
         const qb = new SelectQueryBuilder(this.connection);
         this.usingProp.entityOrProperty(qb);

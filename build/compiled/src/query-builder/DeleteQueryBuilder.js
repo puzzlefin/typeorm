@@ -226,7 +226,7 @@ class DeleteQueryBuilder extends QueryBuilder_1.QueryBuilder {
             return "";
         }
         const alias = this.usingProp.alias ? ` AS ${this.escape(this.usingProp.alias)} ` : "";
-        let result = " USING ";
+        let result = "";
         if (this.usingProp.entityOrProperty instanceof Function) {
             const qb = new SelectQueryBuilder_1.SelectQueryBuilder(this.connection);
             this.usingProp.entityOrProperty(qb);
