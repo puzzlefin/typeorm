@@ -227,7 +227,12 @@ class DeleteQueryBuilder extends QueryBuilder_1.QueryBuilder {
         }
         const alias = this.usingProp.alias ? ` AS ${this.escape(this.usingProp.alias)} ` : "";
         let result = "";
-        if (this.usingProp.entityOrProperty instanceof Function) {
+        const hasEntityMetaData = this.connection.hasMetadata(this.usingProp.entityOrProperty);
+        if (hasEntityMetaData) {
+            const entityMetadata = this.connection.getMetadata(this.usingProp.entityOrProperty);
+            result = result + this.escape(entityMetadata.tableName);
+        }
+        else if (this.usingProp.entityOrProperty instanceof Function) {
             const qb = new SelectQueryBuilder_1.SelectQueryBuilder(this.connection);
             this.usingProp.entityOrProperty(qb);
             result += "(" + qb.getQuery() + ")";
