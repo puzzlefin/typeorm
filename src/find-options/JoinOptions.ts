@@ -16,6 +16,12 @@
  *         user: "categories.user",
  *         profile: "user.profile"
  *     },
+ *     outerJoin: {
+ *         author: "photo.author",
+ *         categories: "categories",
+ *         user: "categories.user",
+ *         profile: "user.profile"
+ *     },
  *     leftJoinAndSelect: {
  *         author: "photo.author",
  *         categories: "categories",
@@ -69,4 +75,11 @@ export interface JoinOptions {
      */
     innerJoin?: { [key: string]: string };
 
+    /**
+     * Object where each key represents the FULL OUTER JOIN alias,
+     * and the corresponding value represents the relation path.
+     *
+     * This method does not select the columns of the joined table.
+     */
+    outerJoin?: { [key: string]: string };
 }

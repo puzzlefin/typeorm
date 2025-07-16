@@ -110,6 +110,31 @@ export declare class SelectQueryBuilder<Entity extends ObjectLiteral> extends Qu
      */
     innerJoin(tableName: string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
     /**
+     * FULL OUTER JOINs (without selection) given subquery.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(subQueryFactory: (qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+    /**
+     * FULL OUTER JOINs (without selection) entity's property.
+     * Given entity property should be a relation.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(property: string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+    /**
+     * FULL OUTER JOINs (without selection) given entity's table.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(entity: Function | string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+    /**
+     * FULL OUTER JOINs (without selection) given table.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(tableName: string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+    /**
      * LEFT JOINs (without selection) given subquery.
      * You also need to specify an alias of the joined data.
      * Optionally, you can add condition and parameters used in condition.
@@ -547,7 +572,7 @@ export declare class SelectQueryBuilder<Entity extends ObjectLiteral> extends Qu
      * Sets extra options that can be used to configure how query builder works.
      */
     setOption(option: SelectQueryBuilderOption): this;
-    protected join(direction: "INNER" | "LEFT", entityOrProperty: Function | string | ((qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>), aliasName: string, condition?: string, parameters?: ObjectLiteral, mapToProperty?: string, isMappingMany?: boolean): void;
+    protected join(direction: "INNER" | "FULL OUTER" | "LEFT", entityOrProperty: Function | string | ((qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>), aliasName: string, condition?: string, parameters?: ObjectLiteral, mapToProperty?: string, isMappingMany?: boolean): void;
     /**
      * Creates "SELECT FROM" part of SQL query.
      */

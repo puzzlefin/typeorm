@@ -148,6 +148,15 @@ class SelectQueryBuilder extends QueryBuilder_1.QueryBuilder {
         return this;
     }
     /**
+     * FULL OUTER JOINs (without selection).
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(entityOrProperty, alias, condition = "", parameters) {
+        this.join("FULL OUTER", entityOrProperty, alias, condition, parameters);
+        return this;
+    }
+    /**
      * LEFT JOINs (without selection).
      * You also need to specify an alias of the joined data.
      * Optionally, you can add condition and parameters used in condition.

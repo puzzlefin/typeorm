@@ -127,6 +127,10 @@ class FindOptionsUtils {
                 Object.keys(options.join.innerJoin).forEach(key => {
                     qb.innerJoin(options.join.innerJoin[key], key);
                 });
+            if (options.join.outerJoin)
+                Object.keys(options.join.outerJoin).forEach(key => {
+                    qb.outerJoin(options.join.outerJoin[key], key);
+                });
             if (options.join.leftJoinAndSelect)
                 Object.keys(options.join.leftJoinAndSelect).forEach(key => {
                     qb.leftJoinAndSelect(options.join.leftJoinAndSelect[key], key);

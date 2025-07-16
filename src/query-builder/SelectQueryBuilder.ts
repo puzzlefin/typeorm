@@ -268,6 +268,45 @@ export class SelectQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
     }
 
     /**
+     * FULL OUTER JOINs (without selection) given subquery.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(subQueryFactory: (qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+
+    /**
+     * FULL OUTER JOINs (without selection) entity's property.
+     * Given entity property should be a relation.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(property: string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+
+    /**
+     * FULL OUTER JOINs (without selection) given entity's table.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(entity: Function|string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+
+    /**
+     * FULL OUTER JOINs (without selection) given table.
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(tableName: string, alias: string, condition?: string, parameters?: ObjectLiteral): this;
+
+    /**
+     * FULL OUTER JOINs (without selection).
+     * You also need to specify an alias of the joined data.
+     * Optionally, you can add condition and parameters used in condition.
+     */
+    outerJoin(entityOrProperty: Function|string|((qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>), alias: string, condition: string = "", parameters?: ObjectLiteral): this {
+        this.join("FULL OUTER", entityOrProperty, alias, condition, parameters);
+        return this;
+    }
+
+    /**
      * LEFT JOINs (without selection) given subquery.
      * You also need to specify an alias of the joined data.
      * Optionally, you can add condition and parameters used in condition.
@@ -1311,7 +1350,7 @@ export class SelectQueryBuilder<Entity extends ObjectLiteral> extends QueryBuild
     // Protected Methods
     // -------------------------------------------------------------------------
 
-    protected join(direction: "INNER"|"LEFT",
+    protected join(direction: "INNER"|"FULL OUTER"|"LEFT",
                    entityOrProperty: Function|string|((qb: SelectQueryBuilder<any>) => SelectQueryBuilder<any>),
                    aliasName: string,
                    condition?: string,

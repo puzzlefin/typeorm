@@ -78,3 +78,7 @@ the same whether from command line or from running the app (same config)
 Sep 26, 2024
 
 Added "USING" support for deletes
+
+July 17, 2025
+
+Added full outer join support for postgres. [Has not been implemented](https://github.com/typeorm/typeorm/issues/8719) in the main repo
