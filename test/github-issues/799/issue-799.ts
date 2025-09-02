@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import * as assert from "assert";
 import {createConnection} from "../../../src/index";
-import rimraf from "rimraf";
+import { rimraf } from "rimraf";
 import {dirname} from "path";
 import {Connection} from "../../../src/connection/Connection";
 
@@ -10,9 +10,8 @@ describe("github issues > #799 sqlite: 'database' path should be created", () =>
 
     const path = `${__dirname}/tmp/sqlitedb.db`;
     const cleanup = (done: () => void) => {
-        rimraf(dirname(path), () => {
-            return done();
-        });
+        rimraf.sync(dirname(path));
+        return done();
     };
 
     before(cleanup);

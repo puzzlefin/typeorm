@@ -78,3 +78,11 @@ the same whether from command line or from running the app (same config)
 Sep 26, 2024
 
 Added "USING" support for deletes
+
+
+Sep 2, 2025
+
+Stop creating extensions on non-master databases
+
+https://github.com/typeorm/typeorm/pull/7693/files
+

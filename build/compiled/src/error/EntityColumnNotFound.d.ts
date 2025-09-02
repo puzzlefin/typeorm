@@ -3,7 +3,7 @@
  */
 export declare class EntityColumnNotFound extends Error {
     propertyPath: string;
-    extra?: any;
+    extra?: any | undefined;
     name: string;
-    constructor(propertyPath: string, extra?: any);
+    constructor(propertyPath: string, extra?: any | undefined);
 }

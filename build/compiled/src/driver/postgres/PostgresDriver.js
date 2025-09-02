@@ -245,7 +245,7 @@ class PostgresDriver {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const extensionsMetadata = yield this.checkMetadataForExtensions();
             if (extensionsMetadata.hasExtensions) {
-                yield Promise.all([this.master, ...this.slaves].map(pool => {
+                yield Promise.all([this.master].map(pool => {
                     return new Promise((ok, fail) => {
                         pool.connect((err, connection, release) => tslib_1.__awaiter(this, void 0, void 0, function* () {
                             yield this.enableExtensions(extensionsMetadata, connection);
