@@ -378,7 +378,8 @@ class MigrationExecutor {
         });
         this.checkForDuplicateMigrations(migrations);
         // sort them by timestamp
-        return migrations.sort((a, b) => a.timestamp - b.timestamp);
+        // PUZZLE: sort by timestamp, then by name
+        return migrations.sort((a, b) => (a.timestamp === b.timestamp) ? a.name.localeCompare(b.name) : a.timestamp - b.timestamp);
     }
     checkForDuplicateMigrations(migrations) {
         const migrationNames = migrations.map(migration => migration.name);
@@ -391,7 +392,8 @@ class MigrationExecutor {
      * Finds the latest migration (sorts by timestamp) in the given array of migrations.
      */
     getLatestTimestampMigration(migrations) {
-        const sortedMigrations = migrations.map(migration => migration).sort((a, b) => (a.timestamp - b.timestamp) * -1);
+        // PUZZLE: sort by timestamp, then by name
+        const sortedMigrations = migrations.map(migration => migration).sort((a, b) => (a.timestamp === b.timestamp) ? a.name.localeCompare(b.name) : (a.timestamp - b.timestamp) * -1);
         return sortedMigrations.length > 0 ? sortedMigrations[0] : undefined;
     }
     /**
