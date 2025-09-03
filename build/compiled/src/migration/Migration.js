@@ -8,11 +8,13 @@ class Migration {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
-    constructor(id, timestamp, name, instance) {
+    // PUZZLE added tieBreaker to sort by tieBreaker, lowest goes first
+    constructor(id, timestamp, name, instance, tieBreaker = 0) {
         this.id = id;
         this.timestamp = timestamp;
         this.name = name;
         this.instance = instance;
+        this.tieBreaker = tieBreaker;
     }
 }
 exports.Migration = Migration;

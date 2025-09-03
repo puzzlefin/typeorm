@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.importClassesFromDirectories = importClassesFromDirectories;
 exports.importJsonsFromDirectories = importJsonsFromDirectories;
-const tslib_1 = require("tslib");
-const glob_1 = tslib_1.__importDefault(require("glob"));
+const glob_1 = require("glob");
 const PlatformTools_1 = require("../platform/PlatformTools");
 const index_1 = require("../index");
 /**
@@ -26,7 +25,7 @@ function importClassesFromDirectories(logger, directories, formats = [".js", ".c
         return allLoaded;
     }
     const allFiles = directories.reduce((allDirs, dir) => {
-        return allDirs.concat(glob_1.default.sync(PlatformTools_1.PlatformTools.pathNormalize(dir)));
+        return allDirs.concat(glob_1.glob.sync(PlatformTools_1.PlatformTools.pathNormalize(dir)));
     }, []);
     if (directories.length > 0 && allFiles.length === 0) {
         logger.log(logLevel, `${classesNotFoundMessage} "${directories}"`);
@@ -47,7 +46,7 @@ function importClassesFromDirectories(logger, directories, formats = [".js", ".c
  */
 function importJsonsFromDirectories(directories, format = ".json") {
     const allFiles = directories.reduce((allDirs, dir) => {
-        return allDirs.concat(glob_1.default.sync(PlatformTools_1.PlatformTools.pathNormalize(dir)));
+        return allDirs.concat(glob_1.glob.sync(PlatformTools_1.PlatformTools.pathNormalize(dir)));
     }, []);
     return allFiles
         .filter(file => PlatformTools_1.PlatformTools.pathExtname(file) === format)

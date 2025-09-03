@@ -1,4 +1,4 @@
-import glob from "glob";
+import { glob } from "glob";
 import {PlatformTools} from "../platform/PlatformTools";
 import {EntitySchema} from "../index";
 import {Logger} from "../logger/Logger";

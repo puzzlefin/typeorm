@@ -21,6 +21,11 @@ export class Migration {
     timestamp: number;
 
     /**
+     * Tie breaker of the migration when there are duplicate timestamps. Lowest goes first.
+     */
+    tieBreaker: number;
+
+    /**
      * Name of the migration (class name).
      */
     name: string;
@@ -34,11 +39,13 @@ export class Migration {
     // Constructor
     // -------------------------------------------------------------------------
 
-    constructor(id: number|undefined, timestamp: number, name: string, instance?: MigrationInterface) {
+    // PUZZLE added tieBreaker to sort by tieBreaker, lowest goes first
+    constructor(id: number|undefined, timestamp: number, name: string, instance?: MigrationInterface, tieBreaker: number = 0) {
         this.id = id;
         this.timestamp = timestamp;
         this.name = name;
         this.instance = instance;
+        this.tieBreaker = tieBreaker;
     }
 
 }

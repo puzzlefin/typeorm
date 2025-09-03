@@ -13,6 +13,10 @@ export declare class Migration {
      */
     timestamp: number;
     /**
+     * Tie breaker of the migration when there are duplicate timestamps. Lowest goes first.
+     */
+    tieBreaker: number;
+    /**
      * Name of the migration (class name).
      */
     name: string;
@@ -20,5 +24,5 @@ export declare class Migration {
      * Migration instance that needs to be run.
      */
     instance?: MigrationInterface;
-    constructor(id: number | undefined, timestamp: number, name: string, instance?: MigrationInterface);
+    constructor(id: number | undefined, timestamp: number, name: string, instance?: MigrationInterface, tieBreaker?: number);
 }

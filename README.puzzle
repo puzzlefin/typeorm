@@ -78,3 +78,16 @@ the same whether from command line or from running the app (same config)
 Sep 26, 2024
 
 Added "USING" support for deletes
+
+
+Sep 2, 2025
+
+Stop creating extensions on non-master databases
+
+https://github.com/typeorm/typeorm/pull/7693/files
+
+Removed the oracle dependency and mssql
+
+Added tiebreaker for migrations having the same timestamp. You can now
+add _1 or _2 so they have a deterministic order.
+

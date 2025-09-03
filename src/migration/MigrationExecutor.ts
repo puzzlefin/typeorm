@@ -417,19 +417,26 @@ export class MigrationExecutor {
      */
     protected getMigrations(): Migration[] {
         const migrations = this.connection.migrations.map(migration => {
-            const migrationClassName = migration.name || (migration.constructor as any).name;
+            let migrationClassName = migration.name || (migration.constructor as any).name;
+            let tieBreaker: number | undefined;
+            const match = migrationClassName.match(/^(.*?)_(\d+)$/);
+            if (match) {
+              migrationClassName = match[1]; 
+              tieBreaker = parseInt(match[2], 10);  // PUZZLE tieBreaker to sort by tieBreaker, lower goes first
+            }
             const migrationTimestamp = parseInt(migrationClassName.substr(-13), 10);
             if (!migrationTimestamp || isNaN(migrationTimestamp)) {
                 throw new Error(`${migrationClassName} migration name is wrong. Migration class name should have a JavaScript timestamp appended.`);
             }
 
-            return new Migration(undefined, migrationTimestamp, migrationClassName, migration);
+            return new Migration(undefined, migrationTimestamp, migrationClassName, migration, tieBreaker);
         });
 
         this.checkForDuplicateMigrations(migrations);
 
         // sort them by timestamp
-        return migrations.sort((a, b) => a.timestamp - b.timestamp);
+        // PUZZLE: sort by timestamp, then by name
+        return migrations.sort((a, b) => (a.timestamp === b.timestamp) ? a.tieBreaker - b.tieBreaker : a.timestamp - b.timestamp);
     }
 
     protected checkForDuplicateMigrations(migrations: Migration[]) {
@@ -444,7 +451,8 @@ export class MigrationExecutor {
      * Finds the latest migration (sorts by timestamp) in the given array of migrations.
      */
     protected getLatestTimestampMigration(migrations: Migration[]): Migration|undefined {
-        const sortedMigrations = migrations.map(migration => migration).sort((a, b) => (a.timestamp - b.timestamp) * -1);
+        // PUZZLE: sort by timestamp, then by name
+        const sortedMigrations = migrations.map(migration => migration).sort((a, b) => (a.timestamp === b.timestamp) ? a.tieBreaker - b.tieBreaker : (a.timestamp - b.timestamp) * -1);
         return sortedMigrations.length > 0 ? sortedMigrations[0] : undefined;
     }
 
