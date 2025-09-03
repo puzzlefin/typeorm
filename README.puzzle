@@ -86,3 +86,4 @@ Stop creating extensions on non-master databases
 
 https://github.com/typeorm/typeorm/pull/7693/files
 
+Removed the oracle dependency and mssql
