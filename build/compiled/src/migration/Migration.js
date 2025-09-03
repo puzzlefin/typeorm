@@ -8,8 +8,8 @@ class Migration {
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
-    // PUZZLE Use a big number for tie breaker to sort by tieBreaker, lowest goes first
-    constructor(id, timestamp, name, instance, tieBreaker = 1000000) {
+    // PUZZLE added tieBreaker to sort by tieBreaker, lowest goes first
+    constructor(id, timestamp, name, instance, tieBreaker = 0) {
         this.id = id;
         this.timestamp = timestamp;
         this.name = name;
