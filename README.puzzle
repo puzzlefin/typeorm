@@ -87,3 +87,7 @@ Stop creating extensions on non-master databases
 https://github.com/typeorm/typeorm/pull/7693/files
 
 Removed the oracle dependency and mssql
+
+Added tiebreaker for migrations having the same timestamp. You can now
+add _1 or _2 so they have a deterministic order.
+
