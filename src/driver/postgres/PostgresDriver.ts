@@ -305,7 +305,7 @@ export class PostgresDriver implements Driver {
     async afterConnect(): Promise<void> {
         const extensionsMetadata = await this.checkMetadataForExtensions();
 
-        if (extensionsMetadata.hasExtensions && !await this.isReadOnly(this.master)) {
+        if (extensionsMetadata.hasExtensions && !(await this.isReadOnly(this.master))) {
             await Promise.all([this.master].map(pool => { // PUZZLE FIX
                 return new Promise<void>((ok, fail) => {
                     pool.connect(async (err: any, connection: any, release: Function) => {
@@ -323,11 +323,9 @@ export class PostgresDriver implements Driver {
 
     protected async isReadOnly(connection: any): Promise<boolean> {
         try { 
-            const result = await this.executeQuery(connection, `SHOW transaction_read_only;`) as { transaction_read_only: string }[];
-            console.log("result", result);
-            return result[0].transaction_read_only === "on";
+            const result = await this.executeQuery(connection, `SHOW transaction_read_only;`) as { rows: { transaction_read_only: string }[] };
+            return result.rows[0].transaction_read_only === "on";
         } catch (error) {
-            console.log("error", error);
             return false;
         }
     }

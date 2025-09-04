@@ -264,11 +264,9 @@ class PostgresDriver {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield this.executeQuery(connection, `SHOW transaction_read_only;`);
-                console.log("result", result);
-                return result[0].transaction_read_only === "on";
+                return result.rows[0].transaction_read_only === "on";
             }
             catch (error) {
-                console.log("error", error);
                 return false;
             }
         });
