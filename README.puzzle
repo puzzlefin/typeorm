@@ -91,3 +91,7 @@ Removed the oracle dependency and mssql
 Added tiebreaker for migrations having the same timestamp. You can now
 add _1 or _2 so they have a deterministic order.
 
+Sep 4, 2025
+
+Automatically check if the connection is in readonly mode, if so, don't try to create extensions
+
