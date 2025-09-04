@@ -324,7 +324,10 @@ export class PostgresDriver implements Driver {
     protected async isReadOnly(connection: any): Promise<boolean> {
         try { 
             const result = await this.executeQuery(connection, `SHOW transaction_read_only;`) as { rows: { transaction_read_only: string }[] };
-            return result.rows[0].transaction_read_only === "on";
+            const value = result.rows[0].transaction_read_only === "on";
+            console.log("isReadOnly", value);
+            
+            return value;
         } catch (error) {
             return false;
         }
