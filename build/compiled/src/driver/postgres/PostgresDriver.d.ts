@@ -50,6 +50,10 @@ export declare class PostgresDriver implements Driver {
      */
     isReplicated: boolean;
     /**
+     * PUZZLE: Indicates if the connection is a read replica. If true don't create extensions;
+     */
+    isReadOnly: boolean;
+    /**
      * Indicates if tree tables are supported by this driver.
      */
     treeSupport: boolean;

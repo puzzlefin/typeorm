@@ -91,3 +91,7 @@ Removed the oracle dependency and mssql
 Added tiebreaker for migrations having the same timestamp. You can now
 add _1 or _2 so they have a deterministic order.
 
+
+Sep 3, 2025
+
+Add isReadOnly PostgresConnectionOption that is used to say "don't run the after hook that creates extensions"

@@ -62,4 +62,10 @@ export interface PostgresConnectionOptions extends BaseConnectionOptions, Postgr
      * Include notification messages from Postgres server in client logs
      */
     readonly logNotifications?: boolean;
+
+    /**
+     * PUZZLE: Indicates if the connection is a read replica. If true don't create extensions;
+     */
+    readonly isReadOnly?: boolean;
+
 }

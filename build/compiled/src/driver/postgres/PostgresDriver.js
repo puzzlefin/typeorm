@@ -32,6 +32,10 @@ class PostgresDriver {
          */
         this.isReplicated = false;
         /**
+         * PUZZLE: Indicates if the connection is a read replica. If true don't create extensions;
+         */
+        this.isReadOnly = false;
+        /**
          * Indicates if tree tables are supported by this driver.
          */
         this.treeSupport = true;
@@ -200,6 +204,7 @@ class PostgresDriver {
         this.connection = connection;
         this.options = connection.options;
         this.isReplicated = this.options.replication ? true : false;
+        this.isReadOnly = this.options.isReadOnly ? true : false;
         if (this.options.useUTC) {
             process.env.PGTZ = 'UTC';
         }
@@ -244,7 +249,7 @@ class PostgresDriver {
     afterConnect() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const extensionsMetadata = yield this.checkMetadataForExtensions();
-            if (extensionsMetadata.hasExtensions) {
+            if (extensionsMetadata.hasExtensions && !this.options.isReadOnly) {
                 yield Promise.all([this.master].map(pool => {
                     return new Promise((ok, fail) => {
                         pool.connect((err, connection, release) => tslib_1.__awaiter(this, void 0, void 0, function* () {
