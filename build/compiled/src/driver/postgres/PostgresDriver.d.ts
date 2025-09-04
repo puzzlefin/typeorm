@@ -102,6 +102,7 @@ export declare class PostgresDriver implements Driver {
      * Makes any action after connection (e.g. create extensions in Postgres driver).
      */
     afterConnect(): Promise<void>;
+    protected isReadOnly(connection: any): Promise<boolean>;
     protected enableExtensions(extensionsMetadata: any, connection: any): Promise<void>;
     protected checkMetadataForExtensions(): Promise<{
         hasUuidColumns: boolean;
