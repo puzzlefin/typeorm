@@ -8,6 +8,7 @@ import { Connection } from "../connection/Connection";
 import { EntityListenerMetadata } from "./EntityListenerMetadata";
 import { IndexMetadata } from "./IndexMetadata";
 import { UniqueMetadata } from "./UniqueMetadata";
+import { ValueTransformer } from "../decorator/options/ValueTransformer";
 /**
  * Contains all information about entity's embedded property.
  */
@@ -84,6 +85,11 @@ export declare class EmbeddedMetadata {
      * However if custom prefix is set to empty string or false, then prefix to column is not applied at all.
      */
     prefix: string;
+    /**
+     * Specifies a value transformer that is to be used to (un)marshal
+     * the entire embedded object when reading or writing to the database.
+     */
+    transformer?: ValueTransformer | ValueTransformer[];
     /**
      * Returns array of property names of current embed and all its parent embeds.
      *

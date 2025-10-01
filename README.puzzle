@@ -95,3 +95,7 @@ Sep 4, 2025
 
 Automatically check if the connection is in readonly mode, if so, don't try to create extensions
 
+
+Sep 30, 2025
+
+Added Embedded transformers

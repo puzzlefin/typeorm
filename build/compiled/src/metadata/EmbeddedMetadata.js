@@ -103,6 +103,7 @@ class EmbeddedMetadata {
         this.propertyName = options.args.propertyName;
         this.customPrefix = options.args.prefix;
         this.isArray = options.args.isArray;
+        this.transformer = options.args.transformer;
     }
     // ---------------------------------------------------------------------
     // Public Methods

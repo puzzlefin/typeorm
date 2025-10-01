@@ -133,7 +133,8 @@ export function Column(typeOrOptions?: ((type?: any) => Function)|ColumnType|(Co
                 propertyName: propertyName,
                 isArray: reflectMetadataType === Array || options.array === true,
                 prefix: options.prefix !== undefined ? options.prefix : undefined,
-                type: typeOrOptions as (type?: any) => Function
+                type: typeOrOptions as (type?: any) => Function,
+                transformer: options.transformer
             } as EmbeddedMetadataArgs);
 
         } else { // register a regular column

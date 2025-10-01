@@ -590,13 +590,22 @@ export class ColumnMetadata {
 
             // next we need to access post[data][information][counters][this.propertyName] to get column value from the counters
             // this recursive function takes array of generated property names and gets the post[data][information][counters] embed
-            const extractEmbeddedColumnValue = (propertyNames: string[], value: ObjectLiteral): any => {
+            const extractEmbeddedColumnValue = (propertyNames: string[], value: ObjectLiteral, embeddedMetadatas: EmbeddedMetadata[]): any => {
                 const propertyName = propertyNames.shift();
-                return propertyName && value ? extractEmbeddedColumnValue(propertyNames, value[propertyName]) : value;
+                const embeddedMetadata = embeddedMetadatas.shift();
+                if (!propertyName || !value) return value;
+
+                let nextValue = value[propertyName];
+                // Apply embedded transformer.to() before extracting column values
+                if (embeddedMetadata && embeddedMetadata.transformer && transform && nextValue !== undefined && nextValue !== null) {
+                    nextValue = ApplyValueTransformers.transformTo(embeddedMetadata.transformer, nextValue);
+                }
+
+                return extractEmbeddedColumnValue(propertyNames, nextValue, embeddedMetadatas);
             };
 
             // once we get nested embed object we get its column, e.g. post[data][information][counters][this.propertyName]
-            const embeddedObject = extractEmbeddedColumnValue(propertyNames, entity);
+            const embeddedObject = extractEmbeddedColumnValue(propertyNames, entity, [...this.embeddedMetadata.embeddedMetadataTree]);
             if (embeddedObject) {
                 if (this.relationMetadata && this.referencedColumn) {
                     const relatedEntity = this.relationMetadata.getEntityValue(embeddedObject);
@@ -663,8 +672,14 @@ export class ColumnMetadata {
                     if (!map[embeddedMetadata.propertyName])
                         map[embeddedMetadata.propertyName] = embeddedMetadata.create();
 
-                    extractEmbeddedColumnValue(embeddedMetadatas, map[embeddedMetadata.propertyName]);
-                    return map;
+                    const result = extractEmbeddedColumnValue(embeddedMetadatas, map[embeddedMetadata.propertyName]);
+
+                    // Apply embedded transformer.from() after setting column values (hydration from DB)
+                    if (embeddedMetadata.transformer && map[embeddedMetadata.propertyName] !== undefined && map[embeddedMetadata.propertyName] !== null) {
+                        map[embeddedMetadata.propertyName] = ApplyValueTransformers.transformFrom(embeddedMetadata.transformer, map[embeddedMetadata.propertyName]);
+                    }
+
+                    return result;
                 }
                 map[this.propertyName] = value;
                 return map;

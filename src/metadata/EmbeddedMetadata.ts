@@ -9,6 +9,7 @@ import {MongoDriver} from "../driver/mongodb/MongoDriver";
 import {EntityListenerMetadata} from "./EntityListenerMetadata";
 import {IndexMetadata} from "./IndexMetadata";
 import {UniqueMetadata} from "./UniqueMetadata";
+import {ValueTransformer} from "../decorator/options/ValueTransformer";
 
 /**
  * Contains all information about entity's embedded property.
@@ -108,6 +109,12 @@ export class EmbeddedMetadata {
     prefix: string;
 
     /**
+     * Specifies a value transformer that is to be used to (un)marshal
+     * the entire embedded object when reading or writing to the database.
+     */
+    transformer?: ValueTransformer|ValueTransformer[];
+
+    /**
      * Returns array of property names of current embed and all its parent embeds.
      *
      * example: post[data][information][counters].id where "data", "information" and "counters" are embeds
@@ -180,6 +187,7 @@ export class EmbeddedMetadata {
         this.propertyName = options.args.propertyName;
         this.customPrefix = options.args.prefix;
         this.isArray = options.args.isArray;
+        this.transformer = options.args.transformer;
     }
 
     // ---------------------------------------------------------------------

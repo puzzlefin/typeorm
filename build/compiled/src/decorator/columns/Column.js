@@ -36,7 +36,8 @@ function Column(typeOrOptions, options) {
                 propertyName: propertyName,
                 isArray: reflectMetadataType === Array || options.array === true,
                 prefix: options.prefix !== undefined ? options.prefix : undefined,
-                type: typeOrOptions
+                type: typeOrOptions,
+                transformer: options.transformer
             });
         }
         else { // register a regular column

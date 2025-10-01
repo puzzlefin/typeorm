@@ -1,3 +1,5 @@
+import {ValueTransformer} from "../decorator/options/ValueTransformer";
+
 /**
  * Arguments for EmbeddedMetadata class.
  */
@@ -28,5 +30,11 @@ export interface EmbeddedMetadataArgs {
      * Type of the class to be embedded.
      */
     type: ((type?: any) => Function);
+
+    /**
+     * Specifies a value transformer that is to be used to (un)marshal
+     * the entire embedded object when reading or writing to the database.
+     */
+    transformer?: ValueTransformer|ValueTransformer[];
 
 }
