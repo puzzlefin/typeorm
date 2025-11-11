@@ -244,7 +244,7 @@ class PostgresDriver {
     afterConnect() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const extensionsMetadata = yield this.checkMetadataForExtensions();
-            if (extensionsMetadata.hasExtensions && !(yield this.isReadOnly(this.master))) {
+            if (extensionsMetadata.hasExtensions && !(yield this.isReadOnly(this.master))) { // PUZZLE: Check if the connection is read only.
                 yield Promise.all([this.master].map(pool => {
                     return new Promise((ok, fail) => {
                         pool.connect((err, connection, release) => tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -260,11 +260,13 @@ class PostgresDriver {
             return Promise.resolve();
         });
     }
+    // PUZZLE: Check if the connection is read only.
     isReadOnly(connection) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield this.executeQuery(connection, `SHOW transaction_read_only;`);
-                return result.rows[0].transaction_read_only === "on";
+                const value = result.rows[0].transaction_read_only === "on";
+                return value;
             }
             catch (error) {
                 return false;

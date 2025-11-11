@@ -95,3 +95,7 @@ Sep 4, 2025
 
 Automatically check if the connection is in readonly mode, if so, don't try to create extensions
 
+Nov 11, 2025
+
+In find, if there is are options set at the top level, make sure there is a where clause
+

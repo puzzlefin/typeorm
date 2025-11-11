@@ -86,6 +86,9 @@ export class FindOptionsUtils {
         if (!options || (!this.isFindOneOptions(options) && !this.isFindManyOptions(options)))
             return qb;
 
+        if (!options.where || Object.keys(options.where).length === 0) {
+            throw new Error("where is required in find options and cannot be empty");
+        }
         if (options.transaction === true) {
             qb.expressionMap.useTransaction = true;
         }
