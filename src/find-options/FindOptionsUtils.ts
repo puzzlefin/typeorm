@@ -54,6 +54,21 @@ export class FindOptionsUtils {
         );
     }
 
+    static validateFindOptions(obj: any) {
+        const possibleOptions = obj;
+        const isFind = possibleOptions && (this.isFindOneOptions(possibleOptions) || this.isFindManyOptions(possibleOptions));
+        if (!isFind) {
+            return true; // not find options, so valid
+        }
+        const keys = Object.keys(possibleOptions);
+        const validKeys = ["select", "where", "relations", "join", "order", "cache", "lock", "loadRelationIds", "loadEagerRelations", "withDeleted", "transaction", "skip", "take"];
+        const isValidated = keys.every(key => validKeys.includes(key));
+        if (!isValidated) {
+            throw new Error(`Invalid find options: ${JSON.stringify(possibleOptions)}. Valid keys are: ${validKeys.join(", ")}`);
+        }
+        return true;
+    }
+
     /**
      * Checks if given object is really instance of FindOptions interface.
      */
@@ -86,9 +101,8 @@ export class FindOptionsUtils {
         if (!options || (!this.isFindOneOptions(options) && !this.isFindManyOptions(options)))
             return qb;
 
-        if (!options.where || Object.keys(options.where).length === 0) {
-            throw new Error("where is required in find options and cannot be empty");
-        }
+        this.validateFindOptions(options); // throws if mixes options and where clause things
+
         if (options.transaction === true) {
             qb.expressionMap.useTransaction = true;
         }

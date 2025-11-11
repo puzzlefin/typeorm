@@ -15,6 +15,7 @@ export declare class FindOptionsUtils {
      * Checks if given object is really instance of FindManyOptions interface.
      */
     static isFindManyOptions<Entity = any>(obj: any): obj is FindManyOptions<Entity>;
+    static validateFindOptions(obj: any): boolean;
     /**
      * Checks if given object is really instance of FindOptions interface.
      */
