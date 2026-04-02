@@ -143,7 +143,6 @@
     "test-fast": "mocha --file ./build/compiled/test/utils/test-setup.js --bail --recursive --timeout 60000 ./build/compiled/test",
     "clean": "rimraf ./build",
     "compile": "rimraf ./build && tsc",
-    "prepare": "tsc -p tsconfig.build.json",
     "watch": "./node_modules/.bin/tsc -w",
     "package": "gulp package",
     "lint": "eslint -c ./.eslintrc.js src/**/*.ts test/**/*.ts sample/**/*.ts",

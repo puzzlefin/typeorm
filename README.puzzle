@@ -98,13 +98,12 @@ Apr 2, 2026
 
 Cleaned up packaging for git-based installs (see BUILD.md for full details):
 
-- Removed 1,323 build artifacts from git tracking. The build/ directory is now
-  fully gitignored. Consumers no longer clone compiled JS — it is built on
-  install via the `prepare` script.
-- Added `prepare` script (`tsc -p tsconfig.build.json`) so the package
-  compiles automatically when installed as a git dependency.
+- Pre-compiled build artifacts (build/compiled/src/) are committed to git so
+  consumers get pre-built JS and type declarations directly — no compilation
+  at install time. Only build/compiled/src/ is tracked; test/sample/browser
+  build output is gitignored.
 - Created `tsconfig.build.json` that extends tsconfig.json but only compiles
-  src/ (not sample/test). This is what `prepare` uses.
+  src/ (not sample/test). Used for packaging: `npx tsc -p tsconfig.build.json`
 - Fixed `bin` field — was pointing to `./cli.js` (did not exist). Now correctly
   points to `./build/compiled/src/cli.js`.
 - Added `types` field (`./build/compiled/src/index.d.ts`) for proper TypeScript
@@ -112,4 +111,5 @@ Cleaned up packaging for git-based installs (see BUILD.md for full details):
 - Added `files` field to limit what gets packed to `build/compiled/src` and
   `extra` — consumers no longer receive tests, samples, docs, docker configs, etc.
 - Aligned tsconfig target with gateway: ES6 -> ES2020, added resolveJsonModule.
+- Aligned dependency versions with gateway (pg, typescript, dotenv, etc.).
 
