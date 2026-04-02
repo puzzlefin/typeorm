@@ -2,9 +2,7 @@
 .DS_Store
 .vscode/
 .idea/
-build/browser/
-build/compiled/test/
-build/compiled/sample/
+build/
 coverage/
 node_modules/
 ormconfig.json
