@@ -39,7 +39,6 @@ npm run compile
 npm run package
 
 
-
 June 29, 2023
 
 Upgraded Typescript to 5+
@@ -94,4 +93,23 @@ add _1 or _2 so they have a deterministic order.
 Sep 4, 2025
 
 Automatically check if the connection is in readonly mode, if so, don't try to create extensions
+
+Apr 2, 2026
+
+Cleaned up packaging for git-based installs (see BUILD.md for full details):
+
+- Removed 1,323 build artifacts from git tracking. The build/ directory is now
+  fully gitignored. Consumers no longer clone compiled JS — it is built on
+  install via the `prepare` script.
+- Added `prepare` script (`tsc -p tsconfig.build.json`) so the package
+  compiles automatically when installed as a git dependency.
+- Created `tsconfig.build.json` that extends tsconfig.json but only compiles
+  src/ (not sample/test). This is what `prepare` uses.
+- Fixed `bin` field — was pointing to `./cli.js` (did not exist). Now correctly
+  points to `./build/compiled/src/cli.js`.
+- Added `types` field (`./build/compiled/src/index.d.ts`) for proper TypeScript
+  resolution.
+- Added `files` field to limit what gets packed to `build/compiled/src` and
+  `extra` — consumers no longer receive tests, samples, docs, docker configs, etc.
+- Aligned tsconfig target with gateway: ES6 -> ES2020, added resolveJsonModule.
 

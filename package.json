@@ -1,7 +1,7 @@
 {
   "name": "typeorm",
   "private": true,
-  "version": "0.2.58",
+  "version": "0.2.59",
   "description": "Data-Mapper ORM for TypeScript, ES7, ES6, ES5. Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, MongoDB databases.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -10,6 +10,7 @@
     "email": "pleerock.me@gmail.com"
   },
   "main": "./build/compiled/src/index.js",
+  "types": "./build/compiled/src/index.d.ts",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -142,14 +143,19 @@
     "test-fast": "mocha --file ./build/compiled/test/utils/test-setup.js --bail --recursive --timeout 60000 ./build/compiled/test",
     "clean": "rimraf ./build",
     "compile": "rimraf ./build && tsc",
+    "prepare": "tsc -p tsconfig.build.json",
     "watch": "./node_modules/.bin/tsc -w",
     "package": "gulp package",
     "lint": "eslint -c ./.eslintrc.js src/**/*.ts test/**/*.ts sample/**/*.ts",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2"
   },
   "bin": {
-    "typeorm": "./cli.js"
+    "typeorm": "./build/compiled/src/cli.js"
   },
+  "files": [
+    "build/compiled/src",
+    "extra"
+  ],
   "funding": "https://opencollective.com/typeorm",
   "collective": {
     "type": "opencollective",

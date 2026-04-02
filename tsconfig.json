@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
-        "lib": ["es6"],
+        "lib": ["es2020"],
         "outDir": "build/compiled",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "target": "es6",
+        "target": "es2020",
+        "resolveJsonModule": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "importHelpers": true,

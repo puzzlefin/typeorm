@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "es2020",
+        "lib": ["es2020"],
+        "resolveJsonModule": true,
+        "rootDir": "."
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "tmp",
+        "temp",
+        "build",
+        "node_modules"
+    ]
+}
